@@ -1,0 +1,4 @@
+uid:            long
+passport:       string
+created_date:   long
+roles:          []

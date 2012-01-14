@@ -1,0 +1,29 @@
+<div class="login">
+	<form class="login-form">
+	    <fieldset>
+	        <legend>请登录</legend>
+	    </fieldset>
+	    <div class="clearfix {{code: v&3?'error':''}}">
+	        <label for="passport">
+	        	账号<span class="red">*</span>
+	        </label>
+	        <div class="input">
+	            <input type="text" name="passport" class="xlarge" required autofocus>
+	            <span class="help-inline">{{nmsg}}</span>
+	        </div>
+	    </div>
+	    <div class="clearfix {{code: v>>2 ? 'error' : ''}}">
+	        <label for="password">
+	        	密码<span class="red">*</span>
+	        </label>
+	        <div class="input">
+	            <input type="password" name="password" class="xlarge" required>
+	            <span class="help-inline">{{pmsg}}</span>
+	        </div>
+	    </div>
+	    <div class="actions">
+		    <input name="login" type="button" value="登录" class="btn primary" data-loading-text="正在登录...">
+		    <input name="clean" type="reset" value="清空" class="btn">
+		</div>
+	</form>
+</div>

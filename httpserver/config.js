@@ -1,0 +1,1 @@
+exports.expires = [    {        regexp: /^(gif|png|jpg)$/ig,        maxAge: 60 * 60 * 24 * 365    }];exports.compress = /^(html|js|css|gif|png|jpg)$/ig;exports.welcome = "index.html";
