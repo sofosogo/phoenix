@@ -1,7 +1,15 @@
 var users = [],
+    user,
     len = 303;
 for( var i = 1; i <= len; i++ ){
-    users.push( {uid: i, passport: "yixiao"+i, name: "一笑"+i, create_date: new Date().getTime()} );
+    user = {
+        uid: i, 
+        passport: "yixiao"+i,
+        password: "yixiao"+i,
+        name: "一笑"+i, 
+        create_date: new Date().getTime()
+    };
+    users.push( user );
 }
 users.getMax = function(){
     return ++len;
@@ -9,6 +17,13 @@ users.getMax = function(){
 users.findByUid = function( uid ){
     for( var i = 0; i < users.length; i++){
         if(users[i].uid === uid){
+            return users[i];
+        }
+    }
+}
+users.findByPassport = function( passport ){
+    for( var i = 0; i < users.length; i++){
+        if(users[i].passport === passport){
             return users[i];
         }
     }

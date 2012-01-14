@@ -1,19 +1,23 @@
 var users = require("./users").users;
 exports.put = function(req, res, params, cookies){
-    var code = 0
-        user = {};
-    if( params.passport === "1" ){
+    var code = 0,
+        user,
+        result = {},
+        passport = params.passport,
+        password = params.password;
+    if( !passport ){
         code += 1;
-    }else if( params.passport === "2" ){
-        code += 2;
-    }else if( params.passport === "3" ){
-        code += 4;
-    }else if( params.passport === "4" ){
-        code += 8;
     }else{
-        user = users[0];
+        if( !password ) code += 4;
+        user = users.findByPassport(params.passport);
+        if( !user ) code += 2;
+        if( password && user && user.password !== password ) code += 8;
+    }
+    if( user ){
+        result.user = user;
         cookies.set("sid", "111111", {httpOnly: false});
         cookies.set("uid", user.uid, {httpOnly: false});
     }
-    res.end( JSON.stringify( {code: code, user: user} ) );
+    result.code = code;
+    res.end( JSON.stringify(result) );
 }
