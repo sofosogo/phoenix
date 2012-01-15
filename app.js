@@ -7,8 +7,9 @@ var http = require("http"),
 // auto start mongodb server
 var sys = require('sys')
 var exec = require('child_process').exec;
-function puts(error, stdout, stderr) { sys.puts(stdout) }
-exec("start_mongodb", puts);
+exec("start_mongodb", function(error, stdout, stderr){
+    sys.puts(stdout);
+});
 
 http.createServer(function(req, res){
     var uri = url.parse(req.url),
