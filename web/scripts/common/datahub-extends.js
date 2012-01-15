@@ -5,8 +5,10 @@ var dh = window.datahub,
     
 dh.require = function( k, fn ){
     var sc = this.shortcut[k];
+    var url = sc.url;
+    url = $.isFunction(url) ? url() : url;
     if( sc && sc.url ){
-        require("ajax").get( sc.url, function( data ){
+        require("ajax").get( url, function( data ){
             dh.put(k, data);
             fn && fn( data );
         });
@@ -20,7 +22,9 @@ dh.listen = function( k ){
 
 dh.shortcut = {
     "user": {
-        url: "/user/" + getCookie("uid"),
+        url: function(){
+            return "/user/" + getCookie("uid");
+        },
         cond: function(){
             return getCookie("uid");
         }
