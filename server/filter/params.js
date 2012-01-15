@@ -23,14 +23,13 @@ exports.filter = function(req, res, next){
                 console.log("Error when parse data:\n\n" + util.inspect(err));
                 error.throw(res, 500);
             })
-            .on("field", function(field, value) {
+            .on("field", function(field, value){
                 req.params[field] = value;
             })
-            .on('file', function(field, file) {
+            .on('file', function(field, file){
                 req.params[field] = value;
             })
-            .on("end", function() {
-                console.log("-> post done");
+            .on("end", function(){
                 next();
             })
         .parse(req);

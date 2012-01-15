@@ -1,13 +1,12 @@
 var path = require("path"),
     fs = require("fs"),
     
-    fs_u = require("./utils/fs_utils.js");
+    fs_u = require("./utils/fs_utils"),
+    config = require("./prod_config");
 
-/*
- * dev env: mock-resource
- * prod env: resource
- */
-exports.resource_folder = "mock-resource"; 
+for( var i in config ){
+    exports[i] = config[i];
+}
 
 exports.mapping = {
     "/user/{uid}": "/user/index",
@@ -19,3 +18,5 @@ var default_filter_path = "./filter/";
 ["cookies", "login", "params"].forEach(function(it){
     exports.filters.push( default_filter_path + it );
 });
+
+exports.default_password = "111111";

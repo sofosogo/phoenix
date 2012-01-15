@@ -16,7 +16,7 @@ function classify(path, realPath, module){
         t = path.replace("/", "\\/");
         t = t.replace(/(\{([\w\d]+)\})/, function(match, str, key ){
             params.push( key );
-            return "([\\w\\d%]+)";
+            return "([\\w\\d%]*)";
         });
         regex_map.push({
             regex: new RegExp("^" + t + "$", "ig"),
