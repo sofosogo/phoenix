@@ -22,7 +22,7 @@ var base = "/scripts/",
     alias[it] = app + it;
 });
 
-["user", "role"].forEach(function(it){
+["user", "role", "change-password"].forEach(function(it){
     alias[it] = auth + it;
 });
 ["user-list", "user-add", "user-edit"].forEach(function(it){

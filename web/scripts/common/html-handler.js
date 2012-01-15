@@ -12,7 +12,9 @@ var map = {
     "role": "/html/auth/role.html",
     "role-list": "/html/auth/role/list.html",
     "role-add": "/html/auth/role/add.html",
-    "role-edit": "/html/auth/role/edit.html"
+    "role-edit": "/html/auth/role/edit.html",
+    
+    "change-password": "/html/auth/change-password.html"
 },
 cache = {};
 
