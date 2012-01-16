@@ -1,2 +1,2 @@
 
-exports.resource_folder = "mock-resource"; 
+exports.resource_folder = "mock-resource";

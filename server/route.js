@@ -6,14 +6,14 @@ var path = require("path"),
 
 var str_map = {},
     regex_map = [],
-    path_map = {};
-    
-function classify(path, realPath, module){
-    if( path.indexOf("{") == -1 ){
-        str_map[path] = module;
+    url_map = {};
+
+function classify(url, res_abs_path){
+    if( url.indexOf("{") == -1 ){
+        str_map[url] = res_abs_path;
     }else{
         var params = [];
-        t = path.replace("/", "\\/");
+        t = url.replace("/", "\\/");
         t = t.replace(/(\{([\w\d]+)\})/, function(match, str, key ){
             params.push( key );
             return "([\\w\\d%]*)";
@@ -21,43 +21,47 @@ function classify(path, realPath, module){
         regex_map.push({
             regex: new RegExp("^" + t + "$", "ig"),
             params: params,
-            module: module
+            path: res_abs_path
         });
     }
-    if( !module["delete"] ){
-        module["delete"] = module.del;
+    var md = require(res_abs_path);
+    if( !md["delete"] && md.del ){
+        md["delete"] = md.del;
     }
-        
-    path_map[path] = realPath;
+    url_map[url] = res_abs_path.replace(root, "").replace(".js", "");
+}
+
+var root = path.resolve("./server/" + config.resource_folder);
+
+function load_resource( path ){
+    var md = require( path );
+    var url = md.path;
+    if( !url ){
+        url = path.replace(root, "").replace(".js", "");
+    }
+    classify( url, path );
 }
 
 (function pre_handle(){
-    var module, path, url,
-        root = "./server/" + config.resource_folder,
-        require_pre = "./" + config.resource_folder,
+    var _url, _path,
         auto_map = fs_u.getAllFileNames(root),
         cust_map = config.mapping;
 
-    auto_map.forEach(function(it, i){
-        path = it.replace(root, "").replace(".js", "");
-        module = require( require_pre + path );
-        url = module.path || path;
-        classify( url, path, module );
-    });
-    for( url in cust_map ){
-        path = cust_map[url];
-        module = require( require_pre + path );
-        classify( url, path, module );
+    auto_map.forEach( load_resource );
+    
+    for( _url in cust_map ){
+        _path = path.resolve(root + cust_map[_url]);
+        classify( _url, _path );
     }
     
     console.log("Resource Mapping: ");
-    for( path in path_map){
-        console.log( path + " = " + path_map[path] );
+    for( _url in url_map){
+        console.log( _url + " = " + url_map[_url] );
     }
 })();
 
 exports.route = function(req, res, pathname ){
-    if( str_map[pathname] ) return str_map[pathname];
+    if( str_map[pathname] ) return require(str_map[pathname]);
     var i = 0, obj, 
         len = regex_map.length;
     for( ; i < len; i++ ){
@@ -65,10 +69,11 @@ exports.route = function(req, res, pathname ){
         if( pathname.match(obj.regex) ){
             for( var j = 0; j < obj.params.length; j++ ){
                 req.params[ obj.params[j] ] = RegExp["$"+(j+1)];
-            }
-            return obj.module;
+            }console.log("aaa"+obj.path)
+            return require(obj.path);
         }
     }
 }
+exports.load_resource = load_resource;
 
 

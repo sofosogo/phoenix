@@ -20,3 +20,8 @@ var default_filter_path = "./filter/";
 });
 
 exports.default_password = "111111";
+
+exports.hot_deploy = {
+    "dirs": ["./server/" + exports.resource_folder],
+    "exts": ["js"]
+};
