@@ -1,3 +1,5 @@
+// TODO 现在只是重新加载该资源文件，并没有处理url mapping
+// 可以考虑用子进程重启
 var fs = require('fs'),
     util = require("util"),
     spawn = require("child_process").spawn,
@@ -22,8 +24,6 @@ files.forEach(function(file){
         interval: 500
     }, function(){
         var abs_path = path.resolve(file);
-        console.log(abs_path);
-        console.log( abs_path in require.cache)
         delete require.cache[abs_path];
     });
 });
