@@ -3,6 +3,7 @@ var http = require("http"),
     querystring = require("querystring"),
     path = require("path"),
     fs = require("fs"),
+    util = require("util"),
     
     formidable = require('formidable'),
     Cookies = require("cookies"),
@@ -10,15 +11,15 @@ var http = require("http"),
     config = require("./server/config"),
     filter = require("./server/filter"),
     route = require("./server/route"),
-    error = require("./server/error");
+    error = require("./server/error"),
+    hot_deploy = require("./server/hot_deploy");
 
 exports.serve = function(req, res){
     try{
         filter.filter(req, res, validate);
     }catch( e ){
-        console.log(e);
-        res.statusCode = parseInt(e.message);
-        res.end();
+        console.log( util.inspect(e) );
+        error.throw( res, 500, e.message );
     }finally{
         
     }
