@@ -61,7 +61,8 @@ component.prototype = {
             _t.inited = true;
             $.isFunction(fn) && fn($v); 
         });
-    }
+    },
+    onShow: function(){ console.log( this.viewname + " is shown.") }
 }
 
 });

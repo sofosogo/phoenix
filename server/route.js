@@ -4,6 +4,8 @@ var path = require("path"),
     fs_u = require("./utils/fs_utils.js"),
     config = require("./config");
 
+var logger = require("log4js").getLogger(__filename);
+
 var str_map = {},
     regex_map = [],
     url_map = {};
@@ -13,13 +15,13 @@ function classify(url, res_abs_path){
         str_map[url] = res_abs_path;
     }else{
         var params = [];
-        t = url.replace("/", "\\/");
-        t = t.replace(/(\{([\w\d]+)\})/, function(match, str, key ){
+        t = url.replace(/\//g, "\\/");
+        t = t.replace(/(\{([\w\d]+)\})/g, function(match, str, key ){
             params.push( key );
             return "([\\w\\d%]*)";
         });
         regex_map.push({
-            regex: new RegExp("^" + t + "$", "ig"),
+            regex: new RegExp("^" + t + "$", "i"),
             params: params,
             path: res_abs_path
         });
@@ -67,9 +69,13 @@ exports.route = function(req, res, pathname ){
     for( ; i < len; i++ ){
         obj = regex_map[i];
         if( pathname.match(obj.regex) ){
+            var k, v;
             for( var j = 0; j < obj.params.length; j++ ){
-                req.params[ obj.params[j] ] = RegExp["$"+(j+1)];
-            }console.log("aaa"+obj.path)
+                k = obj.params[j];
+                v = RegExp["$"+(j+1)];
+                logger.info( "Exact params from pathname: " + k + " = " + v );
+                req.params[k] = v;
+            }
             return require(obj.path);
         }
     }

@@ -1,4 +1,7 @@
-var db = require("./mongodb");
+var db = require("./mongodb"),
+
+    user_service = require("../service/user_service");
+    
 exports.put = function(req, res, params, cookies){
     var code = 0,
         user,
@@ -15,8 +18,10 @@ exports.put = function(req, res, params, cookies){
         return fn();
     }
     db.collection("user").findOne( {"passport": passport}, function(err, user){
-        if( !user ) code += 2;
-        else if( user.password !== password ) code += 8;
+        if( !user )
+            code += 2;
+        else if( user.password !== user_service.cryptoPassword(passport, password, user.created_dt) )
+            code += 8;
         else{
             result.user = user;
             cookies.set("sid", "111111", {httpOnly: false});

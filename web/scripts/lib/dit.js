@@ -12,10 +12,13 @@ var dit = window.dit = {
         return node;
     },
     proto: {
-        fill: function( data ){
+        fill: function( data, append ){
             hide( this );
-            fill( this._holders, this._fields, data || {}, this._opt );
+            fill( this._holders, this._fields, data || {}, this._opt, append );
             return show( this );
+        },
+        append: function( data ){
+            return this.fill( data, true );
         },
         clean: function(){
             hide( this );
@@ -61,13 +64,14 @@ function parseNode( node ){
     return node;
 }
 
-function fill( phs, fields, data, opt ){
+function fill( phs, fields, data, opt, append ){
     var val, handlers;
     for( var field in phs ){
         val = evaluate( data, field );
         if( opt && opt[field] !== void 0 ){
             val = typeof opt[field] === "function" ? opt[field]( val, data ) : opt[field];
         }
+        if( val === void 0 && append ) continue;
         if( val === void 0 || val === null ) val = "";
         if( val === phs[field].val ) continue;
         phs[field].val = val;

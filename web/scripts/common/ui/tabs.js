@@ -35,8 +35,7 @@ var default_tabs_view = '<div>'
                     tab.componet = m;
                     m.ready(function(){
                         _t.append( m.view(), "."+name )
-                            .showTab( name );
-                        $.isFunction(fn) && fn( m );
+                            .showTab( name, fn );
                     });
                 });
                 return;
@@ -49,6 +48,7 @@ var default_tabs_view = '<div>'
             }
             this.tabs._pre = name;
             $.isFunction(fn) && fn(tab.componet);
+            tab.componet.onShow();
         }
     },
     component = require("component");

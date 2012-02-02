@@ -56,7 +56,7 @@ function createTable(){
             e.preventDefault();
             var uid = this.getAttribute("href");
             uid = uid.substring( uid.lastIndexOf("/")+1 );
-            _p.showTab("user-edit", function(edit){console.log(edit);
+            _p.showTab("user-edit", function(edit){
                 edit.showUser( uid );
             });
         });

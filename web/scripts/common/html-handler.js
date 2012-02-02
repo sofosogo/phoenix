@@ -14,6 +14,11 @@ var map = {
     "role-add": "/html/auth/role/add.html",
     "role-edit": "/html/auth/role/edit.html",
     
+    "clothes": "/html/clothes/clothes.html",
+    "clothes-list": "/html/clothes/list.html",
+    "clothes-add": "/html/clothes/add.html",
+    "clothes-edit": "/html/clothes/edit.html",
+    
     "change-password": "/html/auth/change-password.html"
 },
 cache = {};

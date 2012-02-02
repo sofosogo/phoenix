@@ -1,9 +1,14 @@
 var error = require("../../error"),
     db = require("../mongodb"),
-    config = require("../../config");
+    config = require("../../config"),
+    
+    user_service = require("../../service/user_service");
+    
+var logger = require("log4js").getLogger(__filename);
 
 exports.get = function(req, res, params){
     var uid = parseInt(params.uid);
+    logger.info("Get the user whose id is " + uid);
     db.collection("user").findOne({uid: uid}, function(err, user){
         if( err ) return error.throw(res, 500);
         if( !user ) return error.throw(res, 404);
@@ -14,13 +19,18 @@ exports.get = function(req, res, params){
 exports.put = function(req, res, params){
     db.collection("user").find().sort( {uid: -1} ).nextObject(function(err, lastuser){
         if( err ) return error.throw(res, 500);
-        var user = {
-            _id: lastuser.uid + 1,
-            uid: lastuser.uid + 1,
-            passport: params.passport,
-            password: config.default_password,
-            name: params.name
-        };
+        var uid = lastuser ? lastuser.uid + 1 : 1,
+            passport = params.passport,
+            now = new Date().getTime(),
+            password = user_service.cryptoPassword(passport, config.default_password, now),
+            user = {
+                _id: uid,
+                uid: uid,
+                passport: passport,
+                password: password,
+                name: params.name,
+                created_dt: now
+            };
         db.collection("user").insert(user, function(err, user){
             if( err ) return error.throw(res, 500);
             res.end( JSON.stringify({code: 0}) );

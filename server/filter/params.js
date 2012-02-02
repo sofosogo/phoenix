@@ -6,8 +6,15 @@ var http = require("http"),
     formidable = require('formidable'),
     
     error = require("../error");
+
+function condition(req, res){
+    var pathname = url.parse( req.url ).pathname;
+    if( pathname.match(/\/upload/) ) return false;
+    return true;
+}
     
 exports.filter = function(req, res, next){
+    if( !condition(req, res) ) return next();
     
     var method = req.method.toLowerCase(),
         uri = url.parse( req.url );
@@ -24,10 +31,11 @@ exports.filter = function(req, res, next){
                 error.throw(res, 500);
             })
             .on("field", function(field, value){
+                field = field.replace("[]", "");
                 req.params[field] = value;
             })
             .on('file', function(field, file){
-                req.params[field] = value;
+                req.params[field] = file;
             })
             .on("end", function(){
                 next();

@@ -10,7 +10,8 @@ for( var i in config ){
 
 exports.mapping = {
     "/user/{uid}": "/user/index",
-    //"/role/{uid}": "/role/index"
+    //"/role/{uid}": "/role/index",
+    "/clothes/{id}": "/clothes/index",
 };
 
 exports.filters = [];

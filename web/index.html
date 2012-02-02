@@ -1,74 +1,47 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <title>Phoenix - 凤凰计划</title>
-  <link rel="bookmark" href="/images/phoenix.ico" />
-  <link rel="shortcut icon" href="/images/phoenix.ico" />
-  <link rel="stylesheet" href="/css/bootstrap-1.4.0.css"/>
-  <link rel="stylesheet" href="/css/main.css"/>
+    <title>一笑旗袍</title>
+    <link rel="bookmark" href="/images/phoenix.ico" />
+    <link rel="shortcut icon" href="/images/phoenix.ico" />
+    <link rel="stylesheet" href="/css/pc.css"/>
 </head>
 <body>
-  <div class="topbar-wrapper">
-    <div class="topbar" data-dropdown="dropdown" >
-      <div class="topbar-inner">
-        <div class="container">
-          <h3>
-              <a href="#home">Phoenix</a>
-          </h3>
-          <ul class="nav">
-            <li class="active"><a href="#home">首页</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#auth" class="dropdown-toggle">权限管理</a>
-              <ul class="dropdown-menu">
-                <li><a href="#user">用户管理</a></li>
-                <li><a href="#role">角色管理</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="pull-left" action="">
-            <input type="text" placeholder="Search" x-webkit-speech/>
-          </form>
-          <ul class="nav secondary-nav">
-            <li class="dropdown nav_user" style="display: {{name:v?'block':'none'}}">
-              <a href="#" class="dropdown-toggle">{{name}}</a>
-              <ul class="dropdown-menu">
-                <li><a href="#change-password">修改密码</a></li>
-                <li class="divider"></li>
-                <li><a href="#logout">退出</a></li>
-              </ul>
-            </li>
-            <li class="nav_login" style="display: {{name:v?'none':'block'}}">
-              <a href="#login">登录</a>
-            </li>
-          </ul>
+    <div class="header">
+        <div id="logo">
+            <a href="/index.html">一笑旗袍</a>
         </div>
-      </div><!-- /topbar-inner -->
-    </div><!-- /topbar -->
-  </div><!-- /topbar-wrapper -->
-  <div id="main">
-  	<div class="alert-message {{type}} hide">
-	  <a href="javascript:void 0;" class="close">×</a>
-      <p>{{msg}}</p>
+        <ul id="menu">
+            <li><a href="/clothes_list.html">所有旗袍</a></li>
+            <li><a href="#">店长推荐</a></li>
+            <li><a href="#">销售排行</a></li>
+            <li><a href="#"></a></li>
+            <li><a href="/contact_us.html">联系我们</a></li>
+        </ul>
     </div>
-  	<div class="slides"></div>
-  </div>
-  <script type="text/javascript" src="/scripts/lib/underscore.js"></script>
-  <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
-  <script type="text/javascript" src="/scripts/lib/jquery.tabs.dragable.js"></script>
-  <script type="text/javascript" src="/scripts/lib/jquery.ba-hashchange.js"></script>
-  <script type="text/javascript" src="/scripts/lib/bootstrap-buttons.js"></script>
-  <script type="text/javascript" src="/scripts/lib/bootstrap-dropdown.js"></script>
-  <script type="text/javascript" src="/scripts/lib/msgbus.js"></script>
-  <script type="text/javascript" src="/scripts/lib/dit.js"></script>
-  <script type="text/javascript" src="/scripts/lib/datahub.js"></script>
-  <script type="text/javascript" src="/scripts/lib/datahub-dit.js"></script>
-  <script type="text/javascript" src="/scripts/common/cookie.js"></script>
-  <script type="text/javascript" src="/scripts/lib/sea-debug.js"></script>
-  <script type="text/javascript">
-  	seajs.use("./scripts/app");
-  </script>
+    <div class="body">
+        <ul id="slideshow">
+            <li>
+                <div class="featimg">
+                    <img class="pre" src="/images/upload/2.png">
+                    <img class="img" src="/images/upload/1.png">
+                    <img class="post" src="/images/upload/2.png">
+                </div>
+                <div class="feattxt">
+                    康佳32英寸LED,仅售1888元，内置底座，买到就是赚到<br/>新年贺礼！仅1888元32英寸全高清抱回家！内置底座！北京可参加节能补贴
+                </div>
+                <div class="featbtn">
+                    <a class="button" href="http://www.taobao.com">购买</a>
+                    <a class="button" href="">查看详细</a>
+                </div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div class="page"></div>
+    </div>
+    <div class="footer">
+        <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
+    </div>
 </body>
 </html>

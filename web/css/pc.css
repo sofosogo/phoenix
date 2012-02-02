@@ -1,0 +1,171 @@
+body{
+    background: #D8D8D8;
+    color: #2E3037;
+}
+.header, .body, .footer{
+    width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+.header{
+    height: 80px;
+    font-size: 20px;
+    font-weight: 700;
+}
+#logo{
+    width: 100px;
+    float: left;
+    margin: 5px 10px;
+}
+#menu{
+    float: left;
+    list-style: none;
+    margin: 5px 0;
+}
+#menu li{
+    float: left;
+    margin: 0 20px;
+}
+#menu li a{
+    
+}
+#slideshow{
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+#slideshow li{
+    list-style: none;
+    margin-left: 0;
+}
+#slideshow .featimg{
+    width: 500px;
+    height: 500px;
+    float: left;
+}
+#slideshow .pre{
+    position: absolute;
+    top: 200px;
+    width: 150px;
+    height: 250px;
+    opacity: 0.5;
+    z-index: 1;
+}
+#slideshow .img{
+    position: absolute;
+    left: 100px;
+    width: 300px;
+    height: 500px;
+    z-index: 2;
+}
+#slideshow .post{
+    position: absolute;
+    top: 200px;
+    left: 350px;
+    width: 150px;
+    height: 250px;
+    opacity: 0.5;
+    z-index: 1;
+}
+.feattxt{
+    width: 335px;
+    max-height: 400px;
+    padding: 30px;
+    overflow: hidden;
+    float: left;
+}
+.featbtn{
+    width: 335px;
+    max-height: 100px;
+    padding: 30px;
+    overflow: hidden;
+    float: left;
+}
+.clear {
+    clear: both;
+    display: block;
+    height: 1px;
+    overflow: hidden;
+    width: 900px;
+}
+.footer{
+    margin-top: 20px;
+}
+.copyright{
+    width: 900px;
+    font-size: 12px;
+    font-family: arial;
+    text-align: center;
+}
+
+.buttonLink {
+    display: block;
+    margin-bottom: 25px;
+}
+.button {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    background-color: #ccc;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#ccc'); 
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+    background: -moz-linear-gradient(top,  #fff,  #ccc);
+    font-size: 1.1em;
+    padding: 7px 20px 7px 20px;
+    line-height: 2.6em;
+    color: #333333;
+    text-shadow: #ffffff 0px 1px 0px;
+    text-decoration: none;
+    box-shadow: #1a1a1a 0px 1px 2px;
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    -ms-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+}
+.button:after {
+    content: url('../img/interface/black_right_arrow.png') right no-repeat;
+    position: relative;
+    top: 1px;
+    padding-left: 5px;
+}
+.previous:after {
+    content: none;
+}
+.previous:before {
+    content: url('../img/interface/black_left_arrow.png') right no-repeat;
+    position: relative;
+    top: 1px;
+    padding-right: 5px;
+}
+.button:link,
+    .button:active,
+    .button:visited {
+    text-decoration: none;
+}
+.button:hover {
+    background-color: #bbb;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#ccc'); 
+    background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#ccc));
+    background: -moz-linear-gradient(top,  #bbb,  #ccc);
+    color: #555555;
+}
+address{
+    font-style: normal;
+}
+.group li{
+    width: 175px;
+    float: left;
+    margin: 0 20px 10px;
+    list-style: none;
+    text-align: center;
+}
+.group p{
+    height: 36px;
+    width: 175px;
+    overflow: hidden;
+}
+.group a:hover{
+    border: 1px solid green;
+}
+

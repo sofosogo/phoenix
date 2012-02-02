@@ -75,9 +75,11 @@ function serve( req, res ){
 
 function isStaticResource( pathname ){
     return pathname.match( /^\/(scripts|html|css|images|audio)\/.*$/ )
+        || pathname.match( /^\/.*\.html$/ )
         || pathname === ""
         || pathname === "/"
-        || pathname === "/index.html"
+        // || pathname === "/index.html"
+        // || pathname === "/admin.html"
         || pathname === "/favicon.ico"
         || pathname === "/phoenix.ico";
 }

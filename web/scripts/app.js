@@ -3,7 +3,8 @@ define(function(require, exports, module){
 var base = "/scripts/",
     common = base + "common/",
     app = base + "app/",
-    auth = app + "auth/"
+    auth = app + "auth/",
+    clothes = app + "clothes/",
     alias = {
         'es5-safe': 'es5-safe/0.9.2/es5-safe',
         'json': 'json/1.0.1/json',
@@ -14,7 +15,7 @@ var base = "/scripts/",
 .forEach(function(it){
     alias[it] = common + it;
 });
-["component", "tabs", "table"].forEach(function(it){
+["component", "tabs", "table", "ajax-upload"].forEach(function(it){
     alias[it] = common + "ui/" + it;
 });
 
@@ -27,6 +28,12 @@ var base = "/scripts/",
 });
 ["user-list", "user-add", "user-edit"].forEach(function(it){
     alias[it] = auth + it.replace("-", "/");
+});
+["clothes"].forEach(function(it){
+    alias[it] = clothes + it;
+});
+["clothes-list", "clothes-add", "clothes-edit"].forEach(function(it){
+    alias[it] = app + it.replace("-", "/");
 });
 
 seajs.config({
