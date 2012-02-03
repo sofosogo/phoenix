@@ -16,37 +16,32 @@ exports.get = function(req, res, params){
 }
 
 exports.put = function(req, res, params){
+    params.price = parseInt(params.price);
+    
     db.collection("clothes").find().sort( {id: -1} ).nextObject(function(err, lastclothes){
         if( err ) return error.throw(res, 500);
         var id = lastclothes ? lastclothes.id + 1 : 1,
-            clothes = {
-                _id: id,
-                id: id,
-                name: params.name,
-                price: params.price,
-                desc: params.desc,
-                created_dt: new Date().getTime()
-            };
-        db.collection("clothes").insert(clothes, function(err, clothes){
+            c = obj_utils.partial(params, "name", "price", "desc");
+        c.id = c._id = id;
+        c.created_dt = new Date().getTime();
+        
+        db.collection("clothes").insert(c, function(err, clothes){
             if( err ) return error.throw(res, 500);
             res.end( JSON.stringify({code: 0}) );
         });
     });
 }
-exports.put.validate = [function(req, res, next, params){
-    var query = { "passport": params.passport };
-    db.collection("clothes").findOne(query, function(err, clothes){
-        if( err ) return error.throw(res, 500);
-        if( clothes ) return error.throw(res, 500, params.passport + "已经存在。");
-        next();
-    })
-}];
 
-exports.post = function(req, res, params){console.log(params);
+exports.post = function(req, res, params){
+    params.price = parseInt(params.price);
+    
     var id = parseInt(params.id),
         query = {id: id},
         sort = [],
-        update = { $set: obj_utils.partial(params, "name", "price", "desc", "imgs") },
+        update = { 
+            $set: obj_utils.partial(params, 
+                "name", "price", "desc", "imgs", "recommend", "size", "color")
+        },
         options = {};
     db.collection("clothes").findAndModify(query, sort, update, options, function(err, clothes){
         if( err ) return error.throw(res, 500);

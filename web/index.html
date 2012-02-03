@@ -23,16 +23,14 @@
         <ul id="slideshow">
             <li>
                 <div class="featimg">
-                    <img class="pre" src="/images/upload/2.png">
-                    <img class="img" src="/images/upload/1.png">
-                    <img class="post" src="/images/upload/2.png">
+                    <img class="pre" src="{{imgs: v.length >= 2 ? v[v.length-1] : ''}}" alter="">
+                    <img class="img" src="{{imgs.0}}" alter="">
+                    <img class="post" src="{{imgs: v.length >= 2 ? v[1] : ''}}" alter="">
                 </div>
-                <div class="feattxt">
-                    康佳32英寸LED,仅售1888元，内置底座，买到就是赚到<br/>新年贺礼！仅1888元32英寸全高清抱回家！内置底座！北京可参加节能补贴
-                </div>
+                <div class="feattxt">{{desc}}</div>
                 <div class="featbtn">
-                    <a class="button" href="http://www.taobao.com">购买</a>
-                    <a class="button" href="">查看详细</a>
+                    <a class="button" href="{{buy_url}}" target="_blank">购买</a>
+                    <a class="button" href="/clothes/{{id}}.html" target="_blank">查看详细</a>
                 </div>
                 <div class="clear"></div>
             </li>
@@ -43,5 +41,50 @@
     <div class="footer">
         <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
     </div>
+    <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="/scripts/lib/dit.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: "/clothes?recommend=1",
+            success: function( result ){
+                var data = result.data;
+                var index = 0;
+                var temp = dit.create( $("#slideshow")[0] );
+                var $pre = $(".pre");
+                var $img = $(".img");
+                var $post = $(".post");
+                var $page = $(".page");
+                var timeout;
+                var c;
+                var pre_imgs = [];
+                $page.delegate("img", "click", function(){
+                    show( parseInt(this.getAttribute("index")) );
+                })
+                $page.hide();
+                for(var i = 0, len = data.length; i < len; i++){
+                    if( !data[i].imgs || data[i].imgs.length === 0 ) return;
+                    c = $("<img>", {src: data[i].imgs[0], "class": "preview", "index": i});
+                    pre_imgs.push( c )
+                    $page.append( c );
+                    //data[i].desc = data[i].desc.replace(/\n/ig, "<br>");
+                }
+                $page.show();
+                var $pre_imgs = $page.children();
+                function show( i ){
+                    pre_imgs[index].removeClass("active");
+                    index = i;
+                    var d = data[i];
+                    temp.fill( d );
+                    var imgs = d.imgs;
+                    pre_imgs[i].addClass("active");
+                    clearTimeout( timeout );
+                    timeout = setTimeout(function(){
+                        show( index+1 >= data.length ? 0 : index+1 );
+                    }, 10000);
+                }
+                show(0);
+            }
+        });
+    </script>
 </body>
 </html>

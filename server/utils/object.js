@@ -7,7 +7,8 @@ exports.partial = function(obj /*keys..*/){
         part = {};
     for(var i = 0, len = keys.length; i < len; i++){
         key = keys[i];
-        part[key] = obj[key];
+        if( obj[key] !== void 0)
+            part[key] = obj[key];
     }
     return part;
 }

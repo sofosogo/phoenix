@@ -108,18 +108,20 @@ proto.uploadFile = function( file ){
 
 proto.showFiles = function( arr ){
     var _t = this;
+    this.$preview.empty();
     if( !arr || arr.length === 0 ) return ;
+    if( typeof arr === "string" ) arr = [arr];
     $.map(arr, function(el){
         _t.showFile( el );
     });
 }
 proto.showFile = function( path ){
     $("<li>").append($("<img>", {src: path, width: "60px", height: "100px"}))
-        .append( $("<div>", {text: "x", "class": "delete"}) )
+        .append( $("<div>", {text: "x", "class": "delete", onselectstart: "return false"}) )
         .appendTo( this.$preview );
 }
 proto.getFiles = function(){
-    return $.map(this.$preview.find("img:not(.opacity)"), function(el){
+    return $.map(this.$preview.find("img:not(.opacity)").toArray(), function(el){
         return el.getAttribute("src");
     });
 }

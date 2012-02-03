@@ -12,7 +12,7 @@ edit.init = function( $v ){
     $save.click(function(){
         $save.button("loading");
         var data = temp.fetch();
-        data.imgs = _t.upload.getFiles();
+        data.imgs = _t.upload.getFiles();console.log(data);
         require("ajax").post("/clothes/" + data.id, data, function(result){
             $save.button("reset");
             if(result.code ===0){

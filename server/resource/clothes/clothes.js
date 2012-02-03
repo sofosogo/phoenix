@@ -1,7 +1,8 @@
 var util = require("util");
 
 var db = require("../mongodb"),
-    error = require("../../error");
+    error = require("../../error"),
+    obj_utils = require("../../utils/object");
 
 var logger = require("log4js").getLogger(__filename);
 
@@ -12,8 +13,13 @@ exports.get = function(req, res, params){
         pagesize = parseInt(params.pagesize);
         skip = (page - 1) * pagesize,
         len = 0,
-        query = {};
+        query = obj_utils.partial(params, "recommend");
     if( params.name ) query.name = new RegExp( decodeURI(params.name) );
+    if( params.min_price || params.max_price ){
+        var p = query.price = {};
+        if( params.min_price ) p.$gte = parseInt(params.min_price);
+        if( params.max_price ) p.$lte = parseInt(params.max_price);
+    }
     logger.info( "query clothes: " + util.inspect(query) );
     
     var cursor = db.collection("clothes").find( query );

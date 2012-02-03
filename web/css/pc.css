@@ -69,7 +69,7 @@ body{
 }
 .feattxt{
     width: 335px;
-    max-height: 400px;
+    max-height: 352px;
     padding: 30px;
     overflow: hidden;
     float: left;
@@ -155,6 +155,7 @@ address{
 }
 .group li{
     width: 175px;
+    height: 272px;
     float: left;
     margin: 0 20px 10px;
     list-style: none;
@@ -168,4 +169,25 @@ address{
 .group a:hover{
     border: 1px solid green;
 }
-
+.group .price{
+    
+}
+.page{
+    border-bottom: 1px solid #999999;
+    border-top: 1px solid #999999;
+    height: 50px;
+    margin: 10px 0 0;
+    text-align: center;
+}
+.page .preview{
+    width: 30px;
+    height: 50px;
+    margin: 0 5px 0 0;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+}
+.page .active{
+    border-left: 1px solid #999900;
+    border-right: 1px solid #999900;
+    background: #fff;
+}

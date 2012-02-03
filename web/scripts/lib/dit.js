@@ -237,7 +237,7 @@ function scanText( node, phs, prefix ){
 
 function scanFormField( node, phs, fields, prefix ){
     var name = node.name,
-        type = node.type,
+        type = node.getAttribute("type"),
         isNum = node.getAttribute("number"),
         key = getField( prefix, name ),
         handler = fields[key];

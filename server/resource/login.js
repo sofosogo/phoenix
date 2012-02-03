@@ -1,5 +1,7 @@
 var db = require("./mongodb"),
 
+    uuid = require("../utils/uuid"),
+    
     user_service = require("../service/user_service");
     
 exports.put = function(req, res, params, cookies){
@@ -24,7 +26,13 @@ exports.put = function(req, res, params, cookies){
             code += 8;
         else{
             result.user = user;
-            cookies.set("sid", "111111", {httpOnly: false});
+            var sid = uuid();
+            db.collection("session").insert({
+                _id: sid,
+                id: sid,
+                uid: user.uid
+            });
+            cookies.set("sid", sid, {httpOnly: false});
             cookies.set("uid", user.uid, {httpOnly: false});
         }
         fn();

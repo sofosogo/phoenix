@@ -1,5 +1,6 @@
 var url = require("url"),
     
+    db = require("../resource/mongodb"),
     error = require("../error");
 
 function condition(req, res){
@@ -9,12 +10,14 @@ function condition(req, res){
 }
 
 exports.filter = function(req, res, next){
-    if( condition(req, res) ){
-        console.log("Checking login state");
-        if( !req.cookies.get("sid") ){
-            console.error("Need Login");
-            return error.throw(res, 501);
-        }
-    }
-    next();
+    if( !condition(req, res) ) return next();
+    
+    console.log("Checking login state");
+    var sid = req.cookies.get("sid");
+    db.collection("session").findOne({_id: sid}, function(err, session){
+        if( err ) throw err;
+        if( !session ) return error.throw(res, 501);
+        req.session = session;
+        next();
+    });
 }

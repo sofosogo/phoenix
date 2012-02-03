@@ -31,7 +31,10 @@ exports.filter = function(req, res, next){
                 error.throw(res, 500);
             })
             .on("field", function(field, value){
-                field = field.replace("[]", "");
+                if( field.indexOf("[]") !== -1 ){
+                    field = field.replace("[]", "");
+                    if( typeof value === "string" ) value = [value];
+                }
                 req.params[field] = value;
             })
             .on('file', function(field, file){
