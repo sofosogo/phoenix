@@ -15,7 +15,7 @@ var base = "/scripts/",
 .forEach(function(it){
     alias[it] = common + it;
 });
-["component", "tabs", "table", "ajax-upload"].forEach(function(it){
+["component", "tabs", "table", "ajax-upload", "dragable"].forEach(function(it){
     alias[it] = common + "ui/" + it;
 });
 

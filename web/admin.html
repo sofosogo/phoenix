@@ -4,36 +4,34 @@
   <title>Phoenix - 凤凰计划</title>
   <link rel="bookmark" href="/images/phoenix.ico" />
   <link rel="shortcut icon" href="/images/phoenix.ico" />
-  <link rel="stylesheet" href="/css/bootstrap-1.4.0.css"/>
+  <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
   <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
-  <div class="topbar-wrapper">
-    <div class="topbar" data-dropdown="dropdown" >
-      <div class="topbar-inner">
+  <div class="navbar-wrapper">
+    <div class="navbar" data-dropdown="dropdown" >
+      <div class="navbar-inner">
         <div class="container">
-          <h3>
-              <a href="#home">Phoenix</a>
-          </h3>
+          <a class="brand" href="#home">Phoenix</a>
           <ul class="nav">
             <li class="active"><a href="#home">首页</a></li>
             <li><a href="#clothes">旗袍</a></li>
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
             <li class="dropdown">
-              <a href="#auth" class="dropdown-toggle">权限管理</a>
+              <a href="#auth" class="dropdown-toggle">权限管理<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#user">用户管理</a></li>
                 <li><a href="#role">角色管理</a></li>
               </ul>
             </li>
           </ul>
-          <form class="pull-left" action="">
-            <input type="text" placeholder="Search" x-webkit-speech/>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" placeholder="Search" class="search-query" x-webkit-speech/>
           </form>
-          <ul class="nav secondary-nav">
+          <ul class="nav pull-right">
             <li class="dropdown nav_user" style="display: {{name:v?'block':'none'}}">
-              <a href="#" class="dropdown-toggle">{{name}}</a>
+              <a href="#" class="dropdown-toggle">{{name}}<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#change-password">修改密码</a></li>
                 <li class="divider"></li>
@@ -49,7 +47,7 @@
     </div><!-- /topbar -->
   </div><!-- /topbar-wrapper -->
   <div id="main">
-    <div class="alert-message {{type}} hide">
+    <div class="alert {{type}} hide">
       <a href="javascript:void 0;" class="close">×</a>
       <p>{{msg}}</p>
     </div>

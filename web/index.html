@@ -1,9 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <title>一笑旗袍</title>
     <link rel="bookmark" href="/images/phoenix.ico" />
     <link rel="shortcut icon" href="/images/phoenix.ico" />
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
     <link rel="stylesheet" href="/css/pc.css"/>
 </head>
 <body>
@@ -23,14 +26,16 @@
         <ul id="slideshow">
             <li>
                 <div class="featimg">
-                    <img class="pre" src="{{imgs: v.length >= 2 ? v[v.length-1] : ''}}" alter="">
-                    <img class="img" src="{{imgs.0}}" alter="">
-                    <img class="post" src="{{imgs: v.length >= 2 ? v[1] : ''}}" alter="">
+                    <img class="pre {{imgs: v.length >= 2 ? '' : 'hidden'}}" 
+                        src="{{imgs: v.length >= 2 ? v[v.length-1] : ''}}" alt="">
+                    <img class="img" src="{{imgs.0}}" alt="">
+                    <img class="post {{imgs: v.length >= 2 ? '': 'hidden'}}" 
+                        src="{{imgs: v.length >= 2 ? v[1] : ''}}" alt="">
                 </div>
-                <div class="feattxt">{{desc}}</div>
+                <div class="feattxt">${{desc}}</div>
                 <div class="featbtn">
-                    <a class="button" href="{{buy_url}}" target="_blank">购买</a>
-                    <a class="button" href="/clothes/{{id}}.html" target="_blank">查看详细</a>
+                    <a class="btn btn-large" href="{{buy_url}}" target="_blank">购买 »</a>
+                    <a class="btn btn-large" href="/clothes/{{id}}.html" target="_blank">查看详细 »</a>
                 </div>
                 <div class="clear"></div>
             </li>
@@ -49,7 +54,8 @@
             success: function( result ){
                 var data = result.data;
                 var index = 0;
-                var temp = dit.create( $("#slideshow")[0] );
+                var $slideshow = $("#slideshow");
+                var temp = dit.create( $slideshow[0] ).clean();
                 var $pre = $(".pre");
                 var $img = $(".img");
                 var $post = $(".post");
@@ -66,21 +72,25 @@
                     c = $("<img>", {src: data[i].imgs[0], "class": "preview", "index": i});
                     pre_imgs.push( c )
                     $page.append( c );
-                    //data[i].desc = data[i].desc.replace(/\n/ig, "<br>");
+                    data[i].desc = $("<p>").html( data[i].desc.replace(/\n/ig, "<br>") );
                 }
                 $page.show();
                 var $pre_imgs = $page.children();
                 function show( i ){
-                    pre_imgs[index].removeClass("active");
-                    index = i;
-                    var d = data[i];
-                    temp.fill( d );
-                    var imgs = d.imgs;
-                    pre_imgs[i].addClass("active");
-                    clearTimeout( timeout );
-                    timeout = setTimeout(function(){
-                        show( index+1 >= data.length ? 0 : index+1 );
-                    }, 10000);
+                    $slideshow.fadeOut("normal", function(){
+                        pre_imgs[index].removeClass("active");
+                        index = i;
+                        var d = data[i];
+                        temp.fill( d );
+                        var imgs = d.imgs;
+                        pre_imgs[i].addClass("active");
+                        clearTimeout( timeout );
+                        timeout = setTimeout(function(){
+                            show( index+1 >= data.length ? 0 : index+1 );
+                        }, 10000);
+                        $slideshow.fadeIn("normal");
+                    });
+                    
                 }
                 show(0);
             }

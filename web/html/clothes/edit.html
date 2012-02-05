@@ -1,53 +1,72 @@
-<form id="edit-user-info">
+<form class="form-horizontal">
     <input type="hidden" name="id">
-    <div class="clearfix">
-        <label>名字：</label>
-        <div class="input">
-            <input type="text" name="name" class="xlarge">
+    <div class="control-group">
+        <label class="control-label">名字：</label>
+        <div class="controls">
+            <input type="text" name="name" class="input-xlarge">
         </div>
     </div>
-    <div class="clearfix">
-        <label>价格：</label>
-        <div class="input">
-            <input type="number" name="price" class="xlarge">
+    <div class="control-group">
+        <label class="control-label">价格：</label>
+        <div class="controls">
+            <input type="number" name="price" class="input-xlarge">
         </div>
     </div>
-    <div class="clearfix">
-        <label>尺寸：</label>
-        <div class="input input-checkbox">
-            <input type="checkbox" name="size" value="XS"><label>XS</label>
-            <input type="checkbox" name="size" value="S"><label>S</label>
-            <input type="checkbox" name="size" value="M"><label>M</label>
-            <input type="checkbox" name="size" value="L"><label>L</label>
-            <input type="checkbox" name="size" value="XL"><label>XL</label>
-            <input type="checkbox" name="size" value="XXL"><label>XXL</label>
-            <input type="checkbox" name="size" value="XXXL"><label>XXXL</label>
+    <div class="control-group">
+        <label class="control-label">尺寸：</label>
+        <div class="controls">
+            <label class="checkbox inline">
+              <input type="checkbox" name="size"  value="XS"> XS 
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="size"  value="S"> S
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="size" value="M"> M
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="size" value="L"> L 
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="size" value="XL"> XL
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="size" value="XXL"> XXL
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="size" value="XXXL"> XXXL
+            </label>
         </div>
     </div>
-    <div class="clearfix">
-        <label>颜色：</label>
-        <div class="input">
-            <input type="text" name="color" class="xlarge">
+    <div class="control-group">
+        <label class="control-label">颜色：</label>
+        <div class="controls">
+            <input type="text" name="color" class="input-xlarge">
         </div>
     </div>
-    <div class="clearfix">
-        <label>选项：</label>
-        <div class="input input-checkbox">
-            <input type="checkbox" name="recommend" value="1"><label>推荐</label>
+    <div class="control-group">
+        <label class="control-label">选项：</label>
+        <div class="controls">
+            <label class="radio inline">
+              <input type="radio" name="recommend" value="0">不推荐
+            </label>
+            <label class="radio inline">
+              <input type="radio" name="recommend" value="1">推荐
+            </label>
         </div>
     </div>
-    <div class="clearfix">
-        <label>描述：</label>
-        <div class="input">
-            <textarea type="text" name="desc" class="xlarge"></textarea>
+    <div class="control-group">
+        <label class="control-label">描述：</label>
+        <div class="controls">
+            <textarea type="text" name="desc" class="input-xlarge"></textarea>
         </div>
     </div>
-    <div class="clearfix">
-        <label>图片：</label>
-        <div class="input upload-clothes"></div>
+    <div class="control-group">
+        <label class="control-label">图片：</label>
+        <div class="controls upload-clothes"></div>
+    </div>
+    <div class="form-actions">
+        <input name="save" type="button" value="保存" class="btn btn-primary">
+        <input name="delete" type="button" value="删除" class="btn btn-danger">
     </div>
 </form>
-<div class="actions">
-    <input name="save" type="button" value="保存" class="btn primary">
-    <input name="delete" type="button" value="删除" class="btn danger">
-</div>

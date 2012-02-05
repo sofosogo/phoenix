@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <title>一笑旗袍</title>
     <link rel="bookmark" href="/images/phoenix.ico" />
     <link rel="shortcut icon" href="/images/phoenix.ico" />
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
     <link rel="stylesheet" href="/css/pc.css"/>
 </head>
 <body>
@@ -20,56 +23,13 @@
         </ul>
     </div>
     <div class="body">
-        <ul class="group">
+        <ul class="group" each="c" bind="data">
             <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                </a>
-                <div class="price"><em>￥</em>699.00</div>
-                <p>
-                    <a href="/clothes/1.html">映日荷花别样红</a>
-                </p>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
-                </a>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
-                </a>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
-                </a>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
-                </a>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
-                </a>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
-                </a>
-            </li>
-            <li class="clothes-title">
-                <a href="/clothes/1.html">
-                    <img src="/images/upload/1.png" width="120" height="200">
-                    <p>映日荷花别样红</p>
+                <a href="/clothes/{{_id}}.html" target="_blank">
+                    <img src="{{imgs.0}}" width="120" height="200">
+                    <div class="{{isNew}}"></div>
+                    <div class="price">{{price}}</div>
+                    <p>{{name}}</p>
                 </a>
             </li>
         </ul>
@@ -77,5 +37,19 @@
     <div class="footer">
         <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
     </div>
+    <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="/scripts/lib/dit.js"></script>
+    <script type="text/javascript">
+        var $ul = $(".group");
+        var temp = dit.create( $ul[0], { isNew: function( v, data ){
+            if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
+                return "new-good";
+            }
+        }});
+        var page = 1;
+        $.get("/clothes?pagesize=8&page=" + page, function(result){
+            temp.fill( result );
+        });
+    </script>
 </body>
 </html>

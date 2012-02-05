@@ -1,5 +1,5 @@
 define(function(require, exports, module){
-    var $msg = $("div.alert-message"),
+    var $msg = $("div.alert"),
         temp = dit.create( $msg[0] ),
         type,
         tick;

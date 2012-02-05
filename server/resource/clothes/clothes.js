@@ -31,7 +31,7 @@ exports.get = function(req, res, params){
         }
         cursor.sort({id: 1}).skip(skip).limit(pagesize);
         cursor.toArray(function(err, clothes){
-            if( err ) return Error.throw(res, 500);
+            if( err ) return error.throw(res, 500);
             var result = {data: clothes, total: count, page: page };
             res.end( JSON.stringify(result) );
         });

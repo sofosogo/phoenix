@@ -5,7 +5,7 @@ var dit = window.dit = {
         node._opt = opt;
         node._holders = {};
         node._fields = {};
-        scan( node, node._holders, node._fields, [] );
+        scan( node, opt, node._holders, node._fields, [] );
         for( var k in this.proto ){
             node[k] = this.proto[k];
         }
@@ -110,7 +110,7 @@ function fetch( fields ){
     return data;
 }
 
-function scan( node, phs, fields, prefix ){
+function scan( node, opt, phs, fields, prefix ){
     if( node.nodeType === 3 ) return scanText( node, phs, prefix );
     if( node.nodeType !== 1 ) return ;
     if( node.getAttribute("bind") ){
@@ -137,7 +137,7 @@ function scan( node, phs, fields, prefix ){
                     t;
                 for( var i = 0, j = 0; i < arr.length; i++ ){
                     t = children[i % num].cloneNode(true);
-                    t = dit.create(t).fill(arr[i]);
+                    t = dit.create(t, opt).fill(arr[i]);
                     this.node.appendChild( t );
                 }
             },
@@ -158,7 +158,7 @@ function scan( node, phs, fields, prefix ){
     for( var i = 0; i < children.length; i++ ){
         child = children[i];
         if( child.nodeType === 1 ){
-            scan( child, phs, fields, prefix );
+            scan( child, opt, phs, fields, prefix );
         }else if( child.nodeType === 3 ){
             scanText( child, phs, prefix );
         }

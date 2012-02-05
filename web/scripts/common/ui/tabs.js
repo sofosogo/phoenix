@@ -6,14 +6,14 @@ function tabs(){
     var _t = this,
         $v = this.$view = $(default_tabs_view);
     this.tabs = {};
-    $v.delegate(".tabs li > a", "click", function(e){
+    $v.delegate(".nav-tabs li > a", "click", function(e){
         e.preventDefault();
         var name = e.target.getAttribute("href").slice(1);
         _t.showTab( name );
     });
 }
 var default_tabs_view = '<div>'
-    + '<ul class="tabs" style="position: relative;"></ul>'
+    + '<ul class="nav nav-tabs" style="position: relative;"></ul>'
     + '<div class="tab-content"></div>'
     + '</div>',
     
@@ -21,7 +21,7 @@ var default_tabs_view = '<div>'
         addTab: function(name, title, index){
             var $head = $("<li><a href='#" + name + "'>" + title + "</a></li>"),
                 $body = $("<div>", {"class": "tab-pane " + name});
-            this.view(".tabs").append( $head );
+            this.view(".nav-tabs").append( $head );
             this.view(".tab-content").append( $body );
             this.tabs[name] = { head: $head, body: $body };
         },

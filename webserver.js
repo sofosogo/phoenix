@@ -19,9 +19,8 @@ exports.serve = function(req, res){
         filter.filter(req, res, validate);
     }catch( e ){
         console.log( util.inspect(e) );
-        error.throw( res, 500, e.message );
-    }finally{
-        
+        res.statusCode = 200;
+        res.end( JSON.stringify({code: e.code, msg: e.msg}) );
     }
 }
 

@@ -1,6 +1,14 @@
 body{
-    background: #D8D8D8;
+    background: #F2F2F2;
     color: #2E3037;
+    font-family: "微软雅黑", Arial, Helvetica, sans-serif;
+}
+a{
+    color: #000;
+    text-decoration: none;
+}
+a:visited{
+    color: #000;
 }
 .header, .body, .footer{
     width: 900px;
@@ -18,13 +26,13 @@ body{
     margin: 5px 10px;
 }
 #menu{
-    float: left;
+    float: right;
     list-style: none;
-    margin: 5px 0;
+    margin: 5px 10px;
 }
 #menu li{
     float: left;
-    margin: 0 20px;
+    margin: 0 10px 0 20px;
 }
 #menu li a{
     
@@ -69,10 +77,13 @@ body{
 }
 .feattxt{
     width: 335px;
-    max-height: 352px;
+    max-height: 330px;
     padding: 30px;
     overflow: hidden;
     float: left;
+}
+.feattxt p{
+    font-size: 16px;
 }
 .featbtn{
     width: 335px;
@@ -98,86 +109,71 @@ body{
     text-align: center;
 }
 
-.buttonLink {
-    display: block;
-    margin-bottom: 25px;
-}
-.button {
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
-    background-color: #ccc;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#ccc'); 
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
-    background: -moz-linear-gradient(top,  #fff,  #ccc);
-    font-size: 1.1em;
-    padding: 7px 20px 7px 20px;
-    line-height: 2.6em;
-    color: #333333;
-    text-shadow: #ffffff 0px 1px 0px;
-    text-decoration: none;
-    box-shadow: #1a1a1a 0px 1px 2px;
-    -webkit-transition: all .25s ease-in-out;
-    -moz-transition: all .25s ease-in-out;
-    -o-transition: all .25s ease-in-out;
-    -ms-transition: all .25s ease-in-out;
-    transition: all .25s ease-in-out;
-}
-.button:after {
-    content: url('../img/interface/black_right_arrow.png') right no-repeat;
+.group{
     position: relative;
-    top: 1px;
-    padding-left: 5px;
-}
-.previous:after {
-    content: none;
-}
-.previous:before {
-    content: url('../img/interface/black_left_arrow.png') right no-repeat;
-    position: relative;
-    top: 1px;
-    padding-right: 5px;
-}
-.button:link,
-    .button:active,
-    .button:visited {
-    text-decoration: none;
-}
-.button:hover {
-    background-color: #bbb;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb', endColorstr='#ccc'); 
-    background: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#ccc));
-    background: -moz-linear-gradient(top,  #bbb,  #ccc);
-    color: #555555;
-}
-address{
-    font-style: normal;
+    width: 900px;
+    height: 574px;
 }
 .group li{
-    width: 175px;
-    height: 272px;
+    position: relative;
+    width: 200px;
+    height: 277px;
     float: left;
-    margin: 0 20px 10px;
+    margin: 0 18px 15px 0;
     list-style: none;
+}
+.group a{
+    background: #fff;
+    border: 2px solid #CDCDCD;
+    border-radius: 10px;
+    display: block;
+    padding: 10px;
+    color: #000;
     text-align: center;
 }
-.group p{
-    height: 36px;
-    width: 175px;
-    overflow: hidden;
+.group a:visited{
+    color: #000;
 }
-.group a:hover{
-    border: 1px solid green;
+.group a:hover, .group a:focus{
+    border: 2px solid #C30008;
+}
+.group p{
+    height: 42px;
+    overflow: hidden;
+    text-align: center;
+}
+.group .new-good{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    background: url(/images/new-good.png) no-repeat;
 }
 .group .price{
-    
+    position: absolute;
+    right: 10px;
+    top: 180px;
+    background: #F32;
+    color: #fff;
+    font-family: Georgia;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+.group .price:before{
+    content: "￥";
 }
 .page{
-    border-bottom: 1px solid #999999;
-    border-top: 1px solid #999999;
     height: 50px;
     margin: 10px 0 0;
     text-align: center;
+    background: -webkit-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:    -moz-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:     -ms-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:      -o-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:         linear-gradient(left, #F2F2F2, #444, #F2F2F2);
+    background: url(/images/page-bg.png) repeat-y\9;
+    *background:url(/images/page-bg.png) repeat-y;
 }
 .page .preview{
     width: 30px;
@@ -185,9 +181,13 @@ address{
     margin: 0 5px 0 0;
     border-left: 1px solid #999999;
     border-right: 1px solid #999999;
+    cursor: pointer;
 }
 .page .active{
     border-left: 1px solid #999900;
     border-right: 1px solid #999900;
     background: #fff;
+}
+.hidden{
+    display: none;
 }

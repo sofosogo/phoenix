@@ -42,7 +42,7 @@ function upload( opt ){
         $(this).children("div").show();
     }).delegate("li", "mouseout", function(e){
         $(this).children("div").hide();
-    }).delegate("div", "click", function(e){
+    }).delegate("div", "mousedown", function(e){
         var $btn = $(this);
         var $img = $btn.prev();
         if( $btn.text() === "x" ){
@@ -53,6 +53,11 @@ function upload( opt ){
             $img.removeClass("opacity");
         }
         _t.onchange();
+    });
+    require("dragable").dragable( $preview, {
+        callback: function(){
+            _t.onchange();
+        }
     });
 }
 var proto = upload.prototype = {};

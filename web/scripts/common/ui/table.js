@@ -80,7 +80,7 @@ var prototype = {
         this.fetch( 1, fn );
     }
 },
-default_table_view = '<table class="zebra-striped">'+
+default_table_view = '<table class="table table-striped table-condensed">'+
         '<thead></thead>' +
         '<tbody></tbody>' +
         '<tfoot><tr><td><div class="pagination"><ul></ul><div class="total-size"></div></div></td></tr></tfoot>' +
