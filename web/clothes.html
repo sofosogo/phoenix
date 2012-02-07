@@ -18,22 +18,31 @@
         </div>
         <ul id="menu">
             <li><a href="/index.html">首页推荐</a></li>
-            <li class="active"><a href="/clothes_list.html">所有旗袍</a></li>
+            <li><a href="/clothes_list.html">所有旗袍</a></li>
             <li><a href="/contact_us.html">联系我们</a></li>
         </ul>
         <div class="clear"></div>
     </div>
     <div class="body">
-        <ul class="group" each="c" bind="data">
-            <li class="clothes-title">
-                <a href="/clothes.html?id={{id}}" target="_blank">
-                    <img src="{{imgs.0}}" width="120" height="200">
-                    <div class="{{isNew}}"></div>
-                    <div class="price">{{price}}</div>
-                    <p>{{name}}</p>
-                </a>
-            </li>
-        </ul>
+        <div>
+            <div class="good-img">
+                <div class="good-big-img">
+                    <img src="{{imgs.0}}" width="150" height="250">
+                </div>
+                <div class="good-img-list" each="c" bind="imgs">
+                    <img src="{{.}}">
+                </div>
+            </div>
+            <div class="good-desc">
+                <p>{{name}}</p>
+                <p>￥{{price}}</p>
+                <p>上架时间：{{created_dt}}</p>
+                <p>
+                    <a class="btn btn-large" target="_blank" href="{{tburl}}">购买 »</a>
+                </p>
+            </div>
+        </div>
+        <div class="clear"></div>
     </div>
     <div class="footer">
         <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
@@ -41,15 +50,13 @@
     <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
     <script type="text/javascript">
-        var $ul = $(".group");
-        var temp = dit.create( $ul[0], { isNew: function( v, data ){
-            if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
-                return "new-good";
-            }
-        }});
-        var page = 1;
-        $.get("/clothes?pagesize=8&page=" + page, function(result){
-            temp.fill( result );
+        var $body = $(".body"),
+            temp = dit.create( $body[0] ),
+            matched = location.search.match(new RegExp( "[?&]" + "id" + "=([^&]*)&?", "i")); 
+            id = matched ? matched[1] : "1";
+        $.get("/clothes/" + id, function(data){
+            temp.fill( data );
+            document.title += " - " + data.name;
         });
     </script>
 </body>

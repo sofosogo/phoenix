@@ -16,13 +16,13 @@ exports.mapping = {
 
 exports.filters = [];
 var default_filter_path = "./filter/";
-["cookies", "login", "params"].forEach(function(it){
+["cookies", "login", "params", "render"].forEach(function(it){
     exports.filters.push( default_filter_path + it );
 });
 
 exports.default_password = "111111";
 
 exports.hot_deploy = {
-    "dirs": ["./server/" + exports.resource_folder],
+    "dirs": ["./server/"/* + exports.resource_folder*/],
     "exts": ["js"]
 };

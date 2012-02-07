@@ -11,7 +11,7 @@ exports.get = function(req, res, params){
     db.collection("clothes").findOne({id: id}, function(err, clothes){
         if( err ) return error.throw(res, 500);
         if( !clothes ) return error.throw(res, 404);
-        res.end( JSON.stringify(clothes) );
+        res.render( clothes );
     });
 }
 
@@ -40,7 +40,7 @@ exports.post = function(req, res, params){
         sort = [],
         update = { 
             $set: obj_utils.partial(params, 
-                "name", "price", "desc", "imgs", "recommend", "size", "color")
+                "name", "price", "tburl", "desc", "imgs", "recommend", "size", "color")
         },
         options = {};
     db.collection("clothes").findAndModify(query, sort, update, options, function(err, clothes){

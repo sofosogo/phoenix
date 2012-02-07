@@ -12,15 +12,16 @@
 <body>
     <div class="header">
         <div id="logo">
-            <a href="/index.html">一笑旗袍</a>
+            <a href="/index.html">
+                <img src="/images/logo.png">
+            </a>
         </div>
         <ul id="menu">
+            <li class="active"><a href="/index.html">首页推荐</a></li>
             <li><a href="/clothes_list.html">所有旗袍</a></li>
-            <li><a href="#">店长推荐</a></li>
-            <li><a href="#">销售排行</a></li>
-            <li><a href="#"></a></li>
             <li><a href="/contact_us.html">联系我们</a></li>
         </ul>
+        <div class="clear"></div>
     </div>
     <div class="body">
         <ul id="slideshow">
@@ -34,8 +35,8 @@
                 </div>
                 <div class="feattxt">${{desc}}</div>
                 <div class="featbtn">
-                    <a class="btn btn-large" href="{{buy_url}}" target="_blank">购买 »</a>
-                    <a class="btn btn-large" href="/clothes/{{id}}.html" target="_blank">查看详细 »</a>
+                    <a class="btn btn-large btn-primary" href="{{tburl}}" target="_blank">购买 »</a>
+                    <a class="btn btn-large" href="/clothes.html?id={{id}}" target="_blank">查看详细 »</a>
                 </div>
                 <div class="clear"></div>
             </li>
