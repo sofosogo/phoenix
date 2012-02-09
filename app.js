@@ -1,5 +1,6 @@
 var http = require("http"),
     url = require("url"),
+    util = require("util"),
     
     webserver = require("./webserver"),
     httpserver = require("./httpserver");
@@ -7,6 +8,8 @@ var http = require("http"),
 // auto start mongodb server
 var sys = require('sys')
 var exec = require('child_process').exec;
+var logger = require("log4js").getLogger(__filename);
+
 exec("start_mongodb", function(error, stdout, stderr){
     sys.puts(stdout);
 });
@@ -20,4 +23,11 @@ http.createServer(function(req, res){
     }
     webserver.serve(req, res);
 }).listen(80);
+
+process.on("uncaughtException", function(err){
+    if( err.res ){
+        err.res.end( {code: err.code || 500, msg: err.msg} );
+    }
+    logger.error( util.inspect(err) );
+});
 

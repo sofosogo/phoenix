@@ -1,3 +1,5 @@
+var amanda = require("amanda");
+
 var error = require("../../error"),
     db = require("../mongodb"),
     
@@ -31,6 +33,31 @@ exports.put = function(req, res, params){
         });
     });
 }
+var schema = {
+    type: 'object',
+    properties: {
+        "name": {
+            required: true,
+            type: 'string',
+            length: [1, 30]
+        }, 
+        "price": {
+            required: true,
+            type: 'string',
+            length: [0, 6]
+        }, 
+        "desc": {
+            type: 'string',
+            length: [0, 400]
+        }
+    }
+}
+exports.put.validate = [function(req, res, next, params){
+    amanda.validate(params, schema, function(err){
+        if( err ) return error.throw(res, 1, err);
+        next();
+    });
+}];
 
 exports.post = function(req, res, params){
     params.price = parseInt(params.price);

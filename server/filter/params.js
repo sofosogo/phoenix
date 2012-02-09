@@ -1,15 +1,17 @@
 var http = require("http"),
     url = require("url"),
     util = require('util'),
+    path = require("path"),
     querystring = require("querystring"),
     
     formidable = require('formidable'),
     
     error = require("../error");
+var logger = require("log4js").getLogger(__filename);
 
 function condition(req, res){
     var pathname = url.parse( req.url ).pathname;
-    if( pathname.match(/\/upload/) ) return false;
+    if( pathname.match(/^\/upload$/) ) return false;
     return true;
 }
     
@@ -19,13 +21,14 @@ exports.filter = function(req, res, next){
     var method = req.method.toLowerCase(),
         uri = url.parse( req.url );
         
-    req.params = req.params || {};
+    req.params = req.params = querystring.parse( uri.query );
     
     if( method === "get" ){
-        req.params = querystring.parse( uri.query );
+        logger.info( util.inspect(req.params) );
         next();
     }else{
         var form = new formidable.IncomingForm();
+        form.uploadDir = path.resolve("./web/upload/temp/");
         form.on("error", function(err) {
                 console.log("Error when parse data:\n\n" + util.inspect(err));
                 error.throw(res, 500);
@@ -41,6 +44,7 @@ exports.filter = function(req, res, next){
                 req.params[field] = file;
             })
             .on("end", function(){
+                logger.info( util.inspect(req.params) );
                 next();
             })
         .parse(req);

@@ -33,7 +33,7 @@
                     <img class="post {{imgs: v.length >= 2 ? '': 'hidden'}}" 
                         src="{{imgs: v.length >= 2 ? v[1] : ''}}" alt="">
                 </div>
-                <div class="feattxt">${{desc}}</div>
+                <div class="feattxt">${{summary}}</div>
                 <div class="featbtn">
                     <a class="btn btn-large btn-primary" href="{{tburl}}" target="_blank">购买 »</a>
                     <a class="btn btn-large" href="/clothes.html?id={{id}}" target="_blank">查看详细 »</a>
@@ -73,12 +73,12 @@
                     c = $("<img>", {src: data[i].imgs[0], "class": "preview", "index": i});
                     pre_imgs.push( c )
                     $page.append( c );
-                    data[i].desc = $("<p>").html( data[i].desc.replace(/\n/ig, "<br>") );
+                    data[i].summary = $("<div>").html( data[i].summary.replace("\n", "") );
                 }
                 $page.show();
                 var $pre_imgs = $page.children();
                 function show( i ){
-                    $slideshow.fadeOut("normal", function(){
+                    $slideshow.fadeOut("fast", function(){
                         pre_imgs[index].removeClass("active");
                         index = i;
                         var d = data[i];
@@ -89,7 +89,7 @@
                         timeout = setTimeout(function(){
                             show( index+1 >= data.length ? 0 : index+1 );
                         }, 10000);
-                        $slideshow.fadeIn("normal");
+                        $slideshow.fadeIn("fast");
                     });
                     
                 }

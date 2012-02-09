@@ -33,16 +33,17 @@
                     <img src="{{.}}">
                 </div>
             </div>
-            <div class="good-desc">
+            <div class="good-info">
                 <p>{{name}}</p>
                 <p>￥{{price}}</p>
                 <p>上架时间：{{created_dt}}</p>
                 <p>
-                    <a class="btn btn-large" target="_blank" href="{{tburl}}">购买 »</a>
+                    <a class="btn btn-large btn-primary" target="_blank" href="{{tburl}}">购买 »</a>
                 </p>
             </div>
         </div>
         <div class="clear"></div>
+        <div class="good-desc-wrapper">${{desc}}</div>
     </div>
     <div class="footer">
         <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
@@ -51,7 +52,9 @@
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
     <script type="text/javascript">
         var $body = $(".body"),
-            temp = dit.create( $body[0] ),
+            temp = dit.create($body[0], {desc: function(desc){
+                return $("<div>", {"class": "good-desc"}).html(desc);
+            }}),
             matched = location.search.match(new RegExp( "[?&]" + "id" + "=([^&]*)&?", "i")); 
             id = matched ? matched[1] : "1";
         $.get("/clothes/" + id, function(data){

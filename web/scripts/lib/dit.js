@@ -213,13 +213,36 @@ function scanText( node, phs, prefix ){
         var handler = {
             fill: function( val ){
                 if( this.convert ) val = this.convert(val);
-                if( val.jquery ) val = val[0];
-                if( val.nodeType !== 1 || !has$ ) val = textNode( val );
-                parent.replaceChild( val, this._now );
+                if( val.jquery ){
+                    val = $.map(val.toArray(), function(it){return it;});
+                };
+                if( val.nodeType !== 1 && !isArray(val) || !has$ ) val = textNode( val );
+                var now = this._now;
+                if( isArray(now) ){
+                    for( var i = 1; i < now.length; i++){
+                        parent.removeChild( now[i] );
+                    }
+                    now = now[0];
+                }
+                if( isArray(val) ){
+                    for( var i = 0; i < val.length; i++){
+                        parent.insertBefore( val[i], now );
+                    }
+                }else if(val){
+                    parent.insertBefore( val, now );
+                }
+                parent.removeChild( now );
                 this._now = val;
             },
             clean: function(){
-                parent.replaceChild( this._empty, this._now );
+                var now = this._now;
+                if( isArray(now) ){
+                    for( var i = 1; i < now.length; i++){
+                        parent.removeChild( now[i] );
+                    }
+                    now = now[0];
+                }
+                parent.replaceChild( this._empty, now );
                 this._now = this._empty;
             },
             _ori: dn,

@@ -243,8 +243,20 @@ body a:visited, body a:hover, body a:focus{
     border-right: 1px solid #999999;
     cursor: pointer;
 }
-.good-desc{
+.good-info{
     width: 400px;
-    height: 400px;
+    height: 320px;
     float: left;
+}
+.good-desc-wrapper{
+    max-width: 900px;
+    margin: 10px 0 40px;
+}
+.good-desc{
+    max-width: 900px;
+    border: 2px solid #ccc;
+    text-align: center;
+}
+.good-desc p{
+    text-align: center;
 }

@@ -14,11 +14,13 @@ var http = require("http"),
     error = require("./server/error"),
     hot_deploy = require("./server/hot_deploy");
 
+var logger = require("log4js").getLogger(__filename);
+
 exports.serve = function(req, res){
     try{
         filter.filter(req, res, validate);
     }catch( e ){
-        console.log( util.inspect(e) );
+        logger.error( util.inspect(e) );
         res.statusCode = 200;
         res.end( JSON.stringify({code: e.code, msg: e.msg}) );
     }
@@ -36,7 +38,7 @@ function validate(req, res){
     if( !validate || validate.length === 0 ){
         return handle(req, res, resource, method);
     }
-    var i = 0
+    var i = 0,
         len = validate.length, 
         callback = function(){
             if( i === len - 1 ){

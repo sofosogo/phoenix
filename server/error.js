@@ -1,4 +1,4 @@
 
 exports.throw = function( res, code, msg ){
-    throw {code: code, msg: msg};
+    throw {res: res, code: code, msg: msg};
 }

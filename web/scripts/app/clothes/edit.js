@@ -7,10 +7,14 @@ edit.viewname = "clothes-edit";
 edit.init = function( $v ){
     var _t = this,
         temp = this.dit(),
+        $summary = $v.find("textarea[name=summary]"),
+        $desc = $v.find("textarea[name=desc]"),
         $save = $v.find("input[name=save]"),
         $delete = $v.find("input[name=delete]");
     $save.click(function(){
         $save.button("loading");
+        _t.descEditor.sync();
+        _t.summaryEditor.sync();
         var data = temp.fetch();
         data.imgs = _t.upload.getFiles();console.log(data);
         require("ajax").post("/clothes/" + data.id, data, function(result){
@@ -37,7 +41,21 @@ edit.init = function( $v ){
             $save.click();
         }
     });
-    $v.find(".upload-clothes").append( this.upload.view )
+    $v.find(".upload-clothes").append( this.upload.view );
+    
+    this.summaryEditor = KindEditor.create($summary[0], {
+        width: "778px",
+        allowUpload: false,
+        items: [
+            'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+            'insertunorderedlist', '|', 'source']
+    });
+    this.descEditor = KindEditor.create($desc[0], {
+        width: "778px",
+        allowFileManager : true,
+        uploadJson : "/kindeditor/upload",
+        fileManagerJson: "/kindeditor/manager"
+    });
 }
 edit.setId = function( id ){
     this.cid = id;
@@ -47,6 +65,8 @@ edit.onShow = function(){
     var _t = this;
     require("ajax").get("/clothes/" + this.cid, function( clothes ){
         _t.dit().fill(clothes);
+        _t.descEditor.html( clothes.desc || "" );
+        _t.summaryEditor.html( clothes.summary || "" );
         _t.upload.showFiles( clothes.imgs );
     });
 }
