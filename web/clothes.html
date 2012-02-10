@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
     <link rel="stylesheet" href="/css/pc.css"/>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <div class="header">
+    <header>
         <div id="logo">
             <a href="/index.html">
                 <img src="/images/logo.png">
@@ -22,7 +25,7 @@
             <li><a href="/contact_us.html">联系我们</a></li>
         </ul>
         <div class="clear"></div>
-    </div>
+    </header>
     <div class="body">
         <div>
             <div class="good-img">
@@ -45,20 +48,22 @@
         <div class="clear"></div>
         <div class="good-desc-wrapper">${{desc}}</div>
     </div>
-    <div class="footer">
+    <footer>
         <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
-    </div>
+    </footer>
     <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
     <script type="text/javascript" src="/scripts/pc/utils.js"></script>
+    <script type="text/javascript" src="/scripts/pc/to-top.js"></script>
     <script type="text/javascript">
         var $body = $(".body"),
+            $big = $(".good-big-img img"),
             temp = dit.create($body[0], {
                 desc: function( desc ){
                     return $("<div>", {"class": "good-desc"}).html(desc);
                 },
                 created_dt: function( v ){
-                    return utils.format(new Date(v), "yyyy-MM-dd");
+                    return new Date(v).format("yyyy-MM-dd");
                 }
             }),
             matched = location.search.match(new RegExp( "[?&]" + "id" + "=([^&]*)&?", "i")); 
@@ -67,6 +72,9 @@
             temp.fill( data );
             document.title += " - " + data.name;
         });
+        $(".good-img-list").delegate("img", "click", function(e){
+            $big.attr("src", this.src);
+        })
     </script>
 </body>
 </html>

@@ -31,6 +31,7 @@ var prototype = {
             str += genIndex(total, curpage, total, "&gt;|");
         }
         this.view("ul").html( str );
+        this.view(".total-size").html( "共<span class='red''>" + total + "</span>条记录");
     }
 };
 

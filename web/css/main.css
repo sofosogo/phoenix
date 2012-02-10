@@ -10,7 +10,10 @@
     margin-left: auto;
     margin-right: auto;
 }
-
+#main .alert{
+    position: fixed;
+    top: 50px;
+}
 #main .login {
     width: 530px;
     margin: 50px auto;
@@ -35,6 +38,7 @@
 .total-size{
     float: right;
     line-height: 34px;
+    padding-right: 80px;
 }
 
 .drop-area {

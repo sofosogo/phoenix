@@ -9,12 +9,12 @@ body a{
 body a:visited, body a:hover, body a:focus{
     text-decoration: none;
 }
-.header, .body, .footer{
+header, .body, footer{
     width: 900px;
     margin: 0 auto;
     position: relative;
 }
-.header{
+header{
     height: 60px;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -189,6 +189,7 @@ body a:visited, body a:hover, body a:focus{
 .total-size{
     float: right;
     line-height: 34px;
+    padding-right: 80px;
 }
 .page{
     height: 50px;
@@ -283,7 +284,26 @@ body a:visited, body a:hover, body a:focus{
     margin-top: 10px;
     text-align: center;
 }
-.adress{
+.address{
     float: left;
-    margin-left: 50px; 
+    margin-left: 50px;
+}
+.to-top{
+    position: fixed; 
+    bottom: 100px; 
+    right: 100px; 
+    width: 1.2em; 
+    z-index: 9999; 
+    text-align: center; 
+    background: #000; 
+    color: #fff; 
+    font-size: 19px; 
+    outline: none; 
+    line-height: 1.2em; 
+    border-radius: 4px;
+}
+
+/*html5*/
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+    display: block;
 }

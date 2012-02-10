@@ -17,7 +17,7 @@ exports.get = function(req, res, params){
 
 exports.post = function(req, res, params){
     var _id = parseInt( params.uid );
-    var profile = obj_utils.partial(params, "email");
+    var profile = obj_utils.partial(params, "name", "email");
     db.collection("user").findAndModify({_id: _id}, [], {$set: profile}, {}, function(err, user){
         if( err ) error.throw(res, 500);
         if( !user ) error.throw(res, 404);
