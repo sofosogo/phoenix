@@ -23,7 +23,7 @@ dh.listen = function( k ){
 dh.shortcut = {
     "user": {
         url: function(){
-            return "/user/" + getCookie("uid");
+            return "/profile/" + getCookie("uid");
         },
         cond: function(){
             return getCookie("uid");

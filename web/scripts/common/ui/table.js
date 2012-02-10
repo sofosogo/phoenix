@@ -22,12 +22,12 @@ function table( opt ){
         }).appendTo( $head );
     }
     this.view("thead").append( $head );
-    this.view(".pagination").delegate("a", "click", function(e){
-        var page = this.getAttribute("href")
-        page && _t.fetch( page );
-        e.preventDefault();
-        return false;
-    });
+    this.pagination = new pagination({
+        parent: _t,
+        click: function( page ){
+            _t.fetch( page );
+        }
+    }).appendToParent("tfoot td");
 };
 var prototype = {
     fill: function( result ){
@@ -46,25 +46,8 @@ var prototype = {
             }
             this.view("tbody").append( $tr );
         }
-        this.pagination(result.total, this.pagesize, result.page);
+        this.pagination.set(result.total, this.pagesize, result.page);
         this.show();
-    },
-    pagination: function(total, pagesize, curpage){
-        total = Math.ceil( total / pagesize );
-        var index = getStartEnd(total, 11, curpage),
-            str = "";
-        if( total > 0 ){
-            str += genIndex(total, curpage, 1, "|&lt;");
-            str += genIndex(total, curpage, curpage-1, "&lt;");
-        }
-        for( var i = index[0], end = index[1]; i <= end; i++ ){
-            str += genIndex(total, curpage, i);
-        }
-        if( total > 0 ){
-            str += genIndex(total, curpage, curpage+1, "&gt;");
-            str += genIndex(total, curpage, total, "&gt;|");
-        }
-        this.view(".pagination ul").html( str );
     },
     fetch: function( page, fn ){
         var _t = this;
@@ -83,35 +66,10 @@ var prototype = {
 default_table_view = '<table class="table table-striped table-condensed">'+
         '<thead></thead>' +
         '<tbody></tbody>' +
-        '<tfoot><tr><td><div class="pagination"><ul></ul><div class="total-size"></div></div></td></tr></tfoot>' +
+        '<tfoot><tr><td></td></tr></tfoot>' +
     '</table>',
-component = require("component");
-
+component = require("component"),
+pagination = require("pagination-bootstrap");
 table.prototype = _.extend( new component(), prototype );
-
-function getStartEnd( total, max, cur ){
-    var start = 1, end = total, half = Math.floor(max/2);
-    if( total > max ){
-        start = cur - half;
-        end = cur + half;
-        if( start < 1 ){
-            start = 1;
-            end = max;
-        }else if( end > total ){
-            end = total;
-            start = total - max;
-        }
-    }
-    return [start, end];
-}
-function genIndex(total, curpage, page, title){
-    var clazz = "",
-        disabled = (curpage === page || page < 1 || page > total),
-        href =  disabled ? "" : " href='" + page + "'";
-    if( disabled ){
-        clazz = title ? "disabled": "active";
-    }
-    return "<li class='" + clazz + "'><a" + href + ">" + (title || page) + "</a></li>";
-}
 
 });

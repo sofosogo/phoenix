@@ -19,7 +19,9 @@ var map = {
     "clothes-add": "/html/clothes/add.html",
     "clothes-edit": "/html/clothes/edit.html",
     
-    "change-password": "/html/auth/change-password.html"
+    "profile": "/html/profile/change-password.html",
+    "change-password": "/html/profile/change-password.html",
+    "update-profile": "/html/profile/update-profile.html"
 },
 cache = {};
 

@@ -8,8 +8,9 @@ edit.init = function( $v ){
         $save = $v.find("input[name=save]"),
         $delete = $v.find("input[name=delete]");
     $save.click(function(){
-        $save.button("loading");
         var data = temp.fetch();
+        if( !data.uid ) return;
+        $save.button("loading");
         require("ajax").post("/user/" + data.uid, data, function(result){
             $save.button("reset");
             if(result.code ===0){
@@ -19,6 +20,8 @@ edit.init = function( $v ){
     });
     $delete.click(function(){
         var data = temp.fetch();
+        if( !data.uid ) return;
+        if( !confirm("确定要删除该用户吗？") ) return;
         require("ajax").del("/user/" + data.uid, data, function(result){
             $save.button("reset");
             if(result.code === 0){

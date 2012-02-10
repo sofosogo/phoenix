@@ -17,6 +17,7 @@ var renders = {
 }
 
 exports.filter = function(req, res, next){
+    logger.info("start");
     var pathname = url.parse( req.url ).pathname;
     var extname = "json",
         real_url;
@@ -29,5 +30,7 @@ exports.filter = function(req, res, next){
         logger.info("Change pathname from %s to %s", pathname, real_url);
     }
     res.render = renders[extname];
+    
+    logger.info("end");
     next();
 }

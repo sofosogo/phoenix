@@ -50,11 +50,17 @@
     </div>
     <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
+    <script type="text/javascript" src="/scripts/pc/utils.js"></script>
     <script type="text/javascript">
         var $body = $(".body"),
-            temp = dit.create($body[0], {desc: function(desc){
-                return $("<div>", {"class": "good-desc"}).html(desc);
-            }}),
+            temp = dit.create($body[0], {
+                desc: function( desc ){
+                    return $("<div>", {"class": "good-desc"}).html(desc);
+                },
+                created_dt: function( v ){
+                    return utils.format(new Date(v), "yyyy-MM-dd");
+                }
+            }),
             matched = location.search.match(new RegExp( "[?&]" + "id" + "=([^&]*)&?", "i")); 
             id = matched ? matched[1] : "1";
         $.get("/clothes/" + id, function(data){

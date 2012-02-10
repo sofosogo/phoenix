@@ -1,19 +1,41 @@
 <form class="form-horizontal">
     <input type="hidden" name="uid">
     <div class="control-group">
-        <label class="control-label">通行证：</label>
+        <label class="control-label">
+            通行证<span class="red">*</span>
+        </label>
         <div class="controls">
             <input type="text" name="passport" class="input-xlarge" disabled>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">姓名：</label>
+        <label class="control-label">
+            姓名<span class="red">*</span>
+        </label>
         <div class="controls">
             <input type="text" name="name" class="input-xlarge">
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">邮箱<span class="red">*</span></label>
+        <div class="controls">
+            <input type="text" name="email" class="input-xlarge">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">角色</label>
+        <div class="controls">
+            <label class="checkbox inline">
+              <input type="checkbox" name="role" value="U"> 用户 
+            </label>
+            <label class="checkbox inline">
+              <input type="checkbox" name="role" value="Q"> 旗袍
+            </label>
+        </div>
+    </div>
     <div class="form-actions">
         <input name="save" type="button" value="保存" class="btn btn-primary">
+        <input name="reset-password" type="button" value="重置密码" class="btn">
         <input name="delete" type="button" value="删除" class="btn btn-danger">
     </div>
 </form>

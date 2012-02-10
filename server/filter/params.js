@@ -18,6 +18,8 @@ function condition(req, res){
 exports.filter = function(req, res, next){
     if( !condition(req, res) ) return next();
     
+    logger.info("start");
+    
     var method = req.method.toLowerCase(),
         uri = url.parse( req.url );
         
@@ -25,6 +27,7 @@ exports.filter = function(req, res, next){
     
     if( method === "get" ){
         logger.info( util.inspect(req.params) );
+        logger.info("end");
         next();
     }else{
         var form = new formidable.IncomingForm();
@@ -45,6 +48,7 @@ exports.filter = function(req, res, next){
             })
             .on("end", function(){
                 logger.info( util.inspect(req.params) );
+                logger.info("end");
                 next();
             })
         .parse(req);

@@ -5,6 +5,7 @@ var base = "/scripts/",
     app = base + "app/",
     auth = app + "auth/",
     clothes = app + "clothes/",
+    profile = app + "profile/",
     alias = {
         'es5-safe': 'es5-safe/0.9.2/es5-safe',
         'json': 'json/1.0.1/json',
@@ -15,7 +16,7 @@ var base = "/scripts/",
 .forEach(function(it){
     alias[it] = common + it;
 });
-["component", "tabs", "table", "ajax-upload", "dragable"].forEach(function(it){
+["component", "tabs", "table", "ajax-upload", "dragable", "pagination-bootstrap"].forEach(function(it){
     alias[it] = common + "ui/" + it;
 });
 
@@ -23,7 +24,7 @@ var base = "/scripts/",
     alias[it] = app + it;
 });
 
-["user", "role", "change-password"].forEach(function(it){
+["user", "role"].forEach(function(it){
     alias[it] = auth + it;
 });
 ["user-list", "user-add", "user-edit"].forEach(function(it){
@@ -34,6 +35,9 @@ var base = "/scripts/",
 });
 ["clothes-list", "clothes-add", "clothes-edit"].forEach(function(it){
     alias[it] = app + it.replace("-", "/");
+});
+["profile", "change-password", "update-profile"].forEach(function(it){
+    alias[it] = profile + it;
 });
 
 seajs.config({

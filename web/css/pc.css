@@ -139,7 +139,7 @@ body a:visited, body a:hover, body a:focus{
 .group li{
     position: relative;
     width: 200px;
-    height: 277px;
+    height: 267px;
     float: left;
     margin: 0 18px 15px 0;
     list-style: none;
@@ -149,7 +149,7 @@ body a:visited, body a:hover, body a:focus{
     border: 2px solid #CDCDCD;
     border-radius: 10px;
     display: block;
-    padding: 10px;
+    padding: 10px 10px 0;
     color: #000;
     text-align: center;
     
@@ -182,6 +182,13 @@ body a:visited, body a:hover, body a:focus{
 }
 .group .price:before{
     content: "￥";
+}
+.pagination{
+    margin: 5px 0 0 22px;
+}
+.total-size{
+    float: right;
+    line-height: 34px;
 }
 .page{
     height: 50px;
@@ -259,4 +266,24 @@ body a:visited, body a:hover, body a:focus{
 }
 .good-desc p{
     text-align: center;
+}
+.red {
+    color: #b00;
+}
+
+.our-shop{
+    float: left;
+    text-align: center;
+}
+.our-shop img{
+    border: 2px solid #333;
+    
+}
+.our-shop p{
+    margin-top: 10px;
+    text-align: center;
+}
+.adress{
+    float: left;
+    margin-left: 50px; 
 }

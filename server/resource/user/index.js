@@ -2,6 +2,7 @@ var error = require("../../error"),
     db = require("../mongodb"),
     config = require("../../config"),
     
+    obj_utils = require("../..//utils/object"),
     user_service = require("../../service/user_service");
     
 var logger = require("log4js").getLogger(__filename);
@@ -23,14 +24,12 @@ exports.put = function(req, res, params){
             passport = params.passport,
             now = new Date().getTime(),
             password = user_service.cryptoPassword(passport, config.default_password, now),
-            user = {
-                _id: uid,
-                uid: uid,
-                passport: passport,
-                password: password,
-                name: params.name,
-                created_dt: now
-            };
+            user = obj_utils.partial(params, "passport", "name", "email", "role");
+        
+        user._id = user.uid = uid;
+        user.password = password;
+        user.created_dt = now;
+
         db.collection("user").insert(user, function(err, user){
             if( err ) return error.throw(res, 500);
             res.end( JSON.stringify({code: 0}) );
@@ -46,11 +45,11 @@ exports.put.validate = [function(req, res, next, params){
     })
 }];
 
-exports.post = function(req, res, params){
-    var uid = parseInt(params.uid),
-        query = {uid: uid},
+exports.post = function(req, res, params){console.log(params)
+    var _id = parseInt(params.uid),
+        query = {_id: _id},
         sort = [],
-        update = { $set: { passport: params.passport, name: params.name } },
+        update = { $set: obj_utils.partial(params, "name", "email", "role") },
         options = {};
     db.collection("user").findAndModify(query, sort, update, options, function(err, user){
         if( err ) return error.throw(res, 500);

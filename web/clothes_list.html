@@ -40,17 +40,28 @@
     </div>
     <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
+    <script type="text/javascript" src="/scripts/pc/pagination-bootstrap.js"></script>
     <script type="text/javascript">
         var $ul = $(".group");
-        var temp = dit.create( $ul[0], { isNew: function( v, data ){
-            if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
-                return "new-good";
+        var temp = dit.create( $ul[0], {
+            isNew: function( v, data ){
+                if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
+                    return "new-good";
+                }
             }
-        }});
-        var page = 1;
-        $.get("/clothes?pagesize=8&page=" + page, function(result){
-            temp.fill( result );
         });
+        var opt = {
+            click: function( page ){ getGoods( page ); }
+        }
+        var p = new pagination(opt);
+        p.$view.appendTo( $(".body") );
+        function getGoods( page ){
+            $.get("/clothes?pagesize=8&page=" + (page || 1), function(result){
+                temp.fill( result );
+                p.set(result.total, 8, result.page);
+            });
+        }
+        getGoods();
     </script>
 </body>
 </html>
