@@ -1,4 +1,5 @@
-uid:            long
-passport:       string
-created_date:   long
-roles:          []
+uid             long
+passport        string
+created_date    long
+email           string
+roles           ["U", "Q"]
