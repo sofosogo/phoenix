@@ -45,13 +45,15 @@
       </div><!-- /topbar-inner -->
     </div><!-- /topbar -->
   </div><!-- /topbar-wrapper -->
-  <div id="main">
-    <div class="slides"></div>
-    <div class="alert {{type}} hide">
-      <a href="javascript:void 0;" class="close">×</a>
-      <p>{{msg}}</p>
+    <div id="main">
+        <div class="alerts">
+            <div class="alert alert-{{type}} hide">
+                <a href="javascript:void 0;" class="close">×</a>
+                <p>{{msg}}</p>
+            </div>
+        </div>
+        <div class="slides"></div>
     </div>
-  </div>
   <script type="text/javascript" src="/scripts/lib/underscore.js"></script>
   <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="/scripts/lib/jquery.tabs.dragable.js"></script>

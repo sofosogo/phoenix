@@ -1,19 +1,13 @@
-﻿.hide{
-    display: none;
-}
-
+﻿
 #main {
     position: relative;
 }
-#main > .slides, #main .alert {
+#main > .slides{
     width: 940px;
     margin-left: auto;
     margin-right: auto;
 }
-#main .alert{
-    position: fixed;
-    top: 50px;
-}
+
 #main .login {
     width: 530px;
     margin: 50px auto;
@@ -90,4 +84,14 @@
 
 .hidden{
     z-index: -1;
+}
+#main .alerts{
+    position: relative;
+    width: 940px;
+    height: 0;
+    margin: 0 auto 5px;
+    z-index: 9999;
+}
+#main .alert{
+    margin: 0 0 5px;
 }

@@ -145,17 +145,19 @@ header{
     list-style: none;
 }
 .group a{
+    position: relative;
     background: #fff;
-    border: 2px solid #CDCDCD;
     border-radius: 10px;
     display: block;
     padding: 10px 10px 0;
     color: #000;
     text-align: center;
-    
+    border: 2px solid #CDCDCD;
+    box-shadow: 0 0 5px #CDCDCD;
 }
 .group a:hover, .group a:focus{
     border: 2px solid #C30008;
+    box-shadow: 0px 0px 5px #C30008;
 }
 .group p{
     height: 42px;
