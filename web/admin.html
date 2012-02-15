@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Phoenix - 凤凰计划</title>
-  <link rel="bookmark" href="/images/phoenix.ico" />
-  <link rel="shortcut icon" href="/images/phoenix.ico" />
-  <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
-  <link rel="stylesheet" href="/css/main.css"/>
+    <meta charset="utf-8"/>
+    <title>Phoenix - 凤凰计划</title>
+    <link rel="bookmark" href="/images/phoenix.ico" />
+    <link rel="shortcut icon" href="/images/phoenix.ico" />
+    <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/chat.css"/>
 </head>
 <body>
   <div class="navbar-wrapper">
@@ -54,6 +56,16 @@
         </div>
         <div class="slides"></div>
     </div>
+    <div id="chat">
+        <div class="ct-big">
+            <div class="ct-title"></div>
+            <ul class="ct-msglt"></ul>
+            <select class="ct-contact" name="to"></select>
+            <input class="ct-msg" type="text" name="msg">
+            <input class="ct-send btn-info" type="button" name="send" value="发送">
+        </div>
+        <div class="ct-small"></div>
+    </div>
   <script type="text/javascript" src="/scripts/lib/underscore.js"></script>
   <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
   <script type="text/javascript" src="/scripts/lib/jquery.tabs.dragable.js"></script>
@@ -70,5 +82,6 @@
   <script type="text/javascript">
     seajs.use("./scripts/app");
   </script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 </body>
 </html>

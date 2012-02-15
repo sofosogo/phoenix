@@ -3,7 +3,8 @@ var http = require("http"),
     util = require("util"),
     
     webserver = require("./webserver"),
-    httpserver = require("./httpserver");
+    httpserver = require("./httpserver"),
+    chatserver = require("./server/chatserver");
 
 // auto start mongodb server
 var sys = require('sys')
@@ -14,7 +15,7 @@ exec("start_mongodb", function(error, stdout, stderr){
     sys.puts(stdout);
 });
 
-http.createServer(function(req, res){
+var app = http.createServer(function(req, res){
     var uri = url.parse(req.url),
         pathname = uri.pathname;
     console.log( pathname );
@@ -30,4 +31,4 @@ process.on("uncaughtException", function(err){
     }
     logger.error( util.inspect(err) );
 });
-
+chatserver.setup( app );

@@ -17,6 +17,7 @@ main.hashchange = function( hash ){
         m.ready(function($v){
             main.$container.children().detach();
             main.$container.html( $v );
+            m.onShow();
         });
     });
 }

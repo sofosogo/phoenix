@@ -2,7 +2,7 @@
 
 var opacity = 0,
     $totop;
-$(window).scroll(function(){console.log(window.scrollY)
+$(window).scroll(function(){
     if( window.scrollY > 20 && opacity === 0 ){
         opacity = 1;
         getToTop().fadeIn("normal");

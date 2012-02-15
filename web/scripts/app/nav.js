@@ -5,7 +5,8 @@ view.find("a[href]");
 
 var $navLogin = $("ul.pull-right"),
     navLoginTemp = dit.create( $navLogin[0] );
-    navLoginTemp.listen("user");
-    navLoginTemp.fill();
+    
+navLoginTemp.listen("user");
+navLoginTemp.fill();
     
 });

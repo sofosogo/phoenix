@@ -84,7 +84,7 @@ function listen( key, obj, fn, opt ){
 function fire(){
     var diff;
     while( diff = diffs.shift() ){
-        console.log(diff.key)
+        console.log("dh: " + diff.key + "changed.")
         msgbus.fire( diff.key, diff );
     }
 }
@@ -148,11 +148,11 @@ function checkDiff( nd, od, key ){
     return eq;
 }
 
-var msgbus = window.msgbus.getInstance("datahub"),
-    toString = Object.prototype.toString;
+var msgbus = dh.msgbus = window.msgbus.getInstance("datahub"),
+    toString = Object.prototype.toString,
     isArray = function( arr ){
         return arr && toString.call(arr) === "[object Array]";
-    }
+    },
     isObject = function( obj ){
         return obj && toString.call(obj) === "[object Object]";
     };

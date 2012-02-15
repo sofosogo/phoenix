@@ -38,7 +38,10 @@ login.init = function($v){
     function success( res ){
         if( res.code === 0 ){
             require("msg").success("登录成功，现在进入首页……", 3);
-            dh.require("user");
+            dh.require("user", function(){
+                console.log("loginXXXX");
+                msgbus.fire("login");
+            });
             require("main").hashchange("home");
         }else{
             handler( data, res.code );
@@ -50,6 +53,12 @@ login.init = function($v){
     });
     $login.click( login );
 };
+login.onShow = function(){console.log(login.onshow);
+    if( getCookie("sid") ){
+        dh.require("user")
+        return require("main").hashchange("home");
+    }
+}
 
 module.exports = login;
 });

@@ -20,7 +20,7 @@ var base = "/scripts/",
     alias[it] = common + "ui/" + it;
 });
 
-["main", "login", "home", "logout", "nav"].forEach(function(it){
+["main", "login", "home", "logout", "nav", "chat"].forEach(function(it){
     alias[it] = app + it;
 });
 
@@ -56,11 +56,11 @@ seajs.config({
     timeout: 20000
 });
 
-seajs.use(["main", "nav", "extend", "ajax", "msg", "table", "tabs", "audio"], function( main ){
+seajs.use(["main", "nav", "extend", "ajax", "msg", "table", "tabs", "audio", "chat"], function( main ){
     $(window).hashchange(function(){
         main.hashchange();
     });
-    main.hashchange();
+    main.hashchange("login");
 });
 
 });

@@ -30,7 +30,8 @@ exports.put = function(req, res, params, cookies){
             db.collection("session").insert({
                 _id: sid,
                 id: sid,
-                uid: user.uid
+                uid: user.uid,
+                passport: passport
             });
             cookies.set("sid", sid, {httpOnly: false});
             cookies.set("uid", user.uid, {httpOnly: false});

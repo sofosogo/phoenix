@@ -14,10 +14,11 @@ dh.require = function( k, fn ){
         });
     }
 }
-dh.listen = function( k ){
-    var sc = this.shortcut[k];
-    if( !sc.loaded && sc.cond() ) this.require(k);
-    return ls.apply(this, arguments);
+dh.listen = function( k, fn ){
+    this.msgbus.listen( k, fn );
+    //var sc = this.shortcut[k];
+    //if( !sc.loaded && sc.cond() ) this.require(k);
+    //return ls.apply(this, arguments);
 }
 
 dh.shortcut = {
