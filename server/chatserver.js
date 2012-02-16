@@ -23,8 +23,9 @@ exports.setup = function( app ){
                         name = user.name;
                     logger.debug("get user passport: " + pt + ", name: " + name);
                     socket.passport = pt;
+                    socket.name = name;
                     socket.emit("login", users_client);
-                    socket.broadcast.emit("user-added", {"passport": pt, "name": name});
+                    socket.broadcast.emit("user-login", {"passport": pt, "name": name});
                     users[pt] = {"passport": pt, "name": name, "socket": socket};
                     users_client[pt] = name;
                 });
@@ -34,11 +35,14 @@ exports.setup = function( app ){
         socket.on("msg", function( msg ){
             // validate
             var to = msg.to;
+            msg.toname = users_client[to];
+            msg.from = socket.passport;
+            msg.fromname = socket.name;
             if( to === "all" ){
                 sockets.emit("msg", msg);
             }else{
                 if( !users[to] || !users[to].socket){
-                    return socket.emit("users-offline", msg.toname);
+                    return socket.emit("user-offline", msg.toname);
                 }
                 socket.emit("msg", msg);
                 users[to].socket.emit("msg", msg);
@@ -47,9 +51,9 @@ exports.setup = function( app ){
         
         socket.on("disconnect", function(){
             var pt = socket.passport;
+            socket.broadcast.emit("user-logout", {passport: pt, name: socket.name})
             delete users[pt];
             delete users_client[pt];
-            socket.broadcast.emit("user-removed", {passport: pt})
         });
     });
 }

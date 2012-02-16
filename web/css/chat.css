@@ -13,9 +13,17 @@
 }
 #chat .ct-title{
     position: relative;
-    width: 293px;
-    height: 14px;
+    height: 25px;
+    cursor: n-resize;
 }
+#chat .ct-title i{
+    float: right;
+    margin: 4px 4px 0;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 #chat .ct-tip{
 }
 
@@ -30,9 +38,25 @@
     width: 337px;
     overflow: hidden;
 }
-#chat ul.ct-msglt li:nth-child(odd){
-    background: #d2d2d2;
+#chat ul.ct-msglt li.system{
+    color: #567800;
 }
+#chat ul.ct-msglt li.world{
+    color: #567890;
+}
+#chat ul.ct-msglt li.p2p{
+    color: blue;
+}
+#chat ul.ct-msglt li:nth-child(odd){
+    background: #d6d6d6;
+}
+
+#chat ul.ct-msglt li span{
+    color: #a00;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
 #chat .ct-contact{
     width: 100px;
 }
@@ -51,4 +75,8 @@
     border-radius: 7px;
     color: #fff;
     background: #000;
+}
+
+#chat .ct-small{
+    display: none;
 }

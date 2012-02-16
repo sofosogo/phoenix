@@ -3,56 +3,78 @@ define(function(require, exports, module){
 var component = require("component"),
     chat = new component(),
     $chat = chat.$view = $("#chat"),
+    $big = $chat.find(".ct-big"),
+    $small = $chat.find(".ct-small"),
+    $title = $chat.find(".ct-title"),
     $msglist= $chat.find(".ct-msglt"),
     $contactlist = $chat.find(".ct-contact"),
     $input = $(".ct-msg"),
-    $send = $(".ct-send");
+    $send = $(".ct-send"),
+    $minus = $chat.find(".icon-minus"),
+    $plus = $chat.find(".icon-plus");
 var chat = exports;
-
-chat.info = function(){
-    
-}
+chat.info = info;
 
 function info( msg ){
     if( typeof msg === "string" ){
-        msg = {msg: msg, type: "S"};
+        msg = {msg: "[系统] " + msg, type: "system"};
     }
-    var $li = $("<li>", {text: msg.msg});
+    var from = msg.from === user.passport ? 
+        "我" : "<span p='" + msg.from + "'>" + msg.fromname + "</span>";
+    if( msg.to === "all" ){
+        msg.msg = "[群聊] " + from + "说：" + msg.msg;
+        msg.type = "world";
+    }else if( msg.to ){
+        var to = msg.to === user.passport ? 
+            "我" : "<span p='" + msg.to + "'>" + msg.toname + "</span>";
+        msg.msg = "[个人] " + from + "对" + to + "说： " + msg.msg;
+        msg.type = "p2p";
+    }
+    var $li = $("<li>", {"class": msg.type}).html( msg.msg );
     $li.appendTo( $msglist );
+    
+    $msglist[0].scrollTop = $msglist[0].scrollHeight;
 }
 
-var socket, users;
+var socket, users, user;
 dh.listen("user", function(){
     socket = io.connect('http://localhost');
     socket.on("connect", function( data ){
-        var user = dh.get("user");
+        user = dh.get("user");
         socket.emit( "sid", getCookie("sid") );
         $chat.show();
     });
-    socket.on("login", function( users ){
-        console.log( users );
+    socket.on("login", function( us ){
+        console.log( us );
         info( "你已经成功登录聊天服务器。" );
-        users = users;
+        users = us;
         $contactlist.hide().empty();
         $("<option>", {value: "all", text: "所有人"})
             .appendTo( $contactlist );
-        for( var p in users ){
-            $("<option>", {value: p, text: users[p]})
+        for( var p in us ){
+            $("<option>", {value: p, text: us[p]})
                 .appendTo( $contactlist );
         }
         $contactlist.show();
     });
     socket.on("msg", function( msg ){
-        info( msg.msg );
+        info( msg );
     });
-    socket.on("user-added", function( u ){
-        if( !users || users[u.passport] ) return;
+    socket.on("user-login", function( u ){
+        if( !users || users[u.passport] ){
+            // 及时更新name属性。
+            users[u.passport] = u.name;
+            return;
+        }
         users[u.passport] = u.name;
         $("<option>", {value: u.passport, text: u.name})
             .appendTo( $contactlist );
         info( u.name + " 登录了。" );
     });
-    socket.on("user-removed", function( u ){
+    socket.on("user-offline", function( u ){
+        info( u.name + " 已离线，不能发消息给TA。" );
+    });
+    socket.on("user-logout", function( u ){
         var pt = u.passport;
         if( !users || !users[pt] ) return;
         delete users[pt];
@@ -70,12 +92,13 @@ dh.listen("logout", function(){
 
 function send(){
     var to = $contactlist.val();
+    var toname = users[to];
     var msg = $input.val();
-    if( !msg ) info("不能发送空信息。");
+    if( !msg ) return info("不能发送空信息。");
     msg = {to: to, msg: msg};
     console.log( msg );
     
-    socket.emit("msg", {to: to, msg: msg} );
+    socket.emit("msg", msg );
     $input.val( "" );
 }
 $input.keyup(function(e){
@@ -84,5 +107,39 @@ $input.keyup(function(e){
     }
 });
 $send.click( send );
-
+$msglist.delegate("li.world", "click", function(){
+    $contactlist.val( "all" );
+});
+$msglist.delegate("span", "click", function(e){
+    var p = this.getAttribute("p");
+    if( !users[p] ) return info( this.innerHTML + " 已离线，不能发消息给TA。");
+    $contactlist.val( p );
+    $input.focus();
+});
+$contactlist.change(function(){
+    $input.focus();
+});
+$minus.click(function(){
+    $big.hide();
+    $small.show();
+});
+$plus.click(function(){
+    $big.show();
+    $small.hide();
+});
+$title.draggable({
+    start: function(x, y, e){
+        this.drag = {};
+        this.drag.height = $msglist.height();
+    },
+    move: function(x, y, e, dx, dy, dt){
+        $msglist.height( this.drag.height - dy );
+        return false;
+    },
+    end: function(x, y, e, dx, dy){
+        $msglist.height( this.drag.height - dy );
+        $msglist[0].scrollTop = $msglist[0].scrollHeight;
+        return false;
+    }
+});
 });
