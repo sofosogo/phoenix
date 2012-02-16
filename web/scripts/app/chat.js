@@ -37,15 +37,23 @@ function info( msg ){
 }
 
 var socket, users, user;
-dh.listen("user", function(){
-    socket = io.connect('http://localhost');
+dh.listen("user", function(data){
+    user = data.data;
+    if( !user || !user.uid || !user.name ){
+        return socket.disconnect();
+    }
+    if( socket ) return socket.socket.reconnect();
+    socket = io.connect("/");
     socket.on("connect", function( data ){
-        user = dh.get("user");
-        socket.emit( "sid", getCookie("sid") );
+        socket.emit( "login", getCookie("sid") );
+        $msglist.empty();
+        $input.empty();
         $chat.show();
     });
+    socket.on("connect_failed", function( data ){
+        console.log("connect_failed--------------------");
+    });
     socket.on("login", function( us ){
-        console.log( us );
         info( "你已经成功登录聊天服务器。" );
         users = us;
         $contactlist.hide().empty();
@@ -57,9 +65,7 @@ dh.listen("user", function(){
         }
         $contactlist.show();
     });
-    socket.on("msg", function( msg ){
-        info( msg );
-    });
+    socket.on("msg", info);
     socket.on("user-login", function( u ){
         if( !users || users[u.passport] ){
             // 及时更新name属性。
@@ -81,13 +87,9 @@ dh.listen("user", function(){
         $contactlist.find("option[value=" + pt + "]").remove();
         info( u.name + " 退出了。" );
     });
-    socket.on("disconnect", function( users ){
+    socket.on("disconnect", function(){
         $chat.hide();
     });
-});
-dh.listen("logout", function(){
-    socket.emit("disconnect");
-    $chat.hide();
 });
 
 function send(){
@@ -96,7 +98,6 @@ function send(){
     var msg = $input.val();
     if( !msg ) return info("不能发送空信息。");
     msg = {to: to, msg: msg};
-    console.log( msg );
     
     socket.emit("msg", msg );
     $input.val( "" );
@@ -132,12 +133,18 @@ $title.draggable({
         this.drag = {};
         this.drag.height = $msglist.height();
     },
-    move: function(x, y, e, dx, dy, dt){
-        $msglist.height( this.drag.height - dy );
+    move: function(x, y, e, dx, dy, dt){console.log(window)
+        var height = this.drag.height - dy;
+        if( height <= window.height() - 115 ){
+            $msglist.height( this.drag.height - dy );
+        }
         return false;
     },
     end: function(x, y, e, dx, dy){
-        $msglist.height( this.drag.height - dy );
+        var height = this.drag.height - dy;
+        if( height <= window.height() - 115 ){
+            $msglist.height( this.drag.height - dy );
+        }
         $msglist[0].scrollTop = $msglist[0].scrollHeight;
         return false;
     }

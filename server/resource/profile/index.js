@@ -11,7 +11,7 @@ exports.get = function(req, res, params){
         if( err ) error.throw(res, 500);
         if( !user ) error.throw(res, 404);
         var result = obj_utils.partial(user, "uid", "passport", "name", "email", "role");
-        res.end( JSON.stringify(result) );
+        res.render( result );
     });
 }
 

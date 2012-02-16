@@ -1,12 +1,10 @@
 define(function(require, exports, module) {
 
-var view = $("div.topbar");
-view.find("a[href]");
+var $view = $("div.navbar");
 
-var $navLogin = $("ul.pull-right"),
-    navLoginTemp = dit.create( $navLogin[0] );
+var navTemp = dit.create( $view[0] );
     
-navLoginTemp.listen("user");
-navLoginTemp.fill();
+navTemp.listen("user");
+navTemp.fill();
     
 });

@@ -1,0 +1,9 @@
+html {
+    background-image: url(about: blank); /*用浏览器空白页面作为背景*/
+    background-attachment: fixed; /*确保滚动条滚动时，元素不闪动*/
+}
+
+.to-top{
+    position: absolute;
+    top: expression(eval(document.body.scrollTop + 50));
+}

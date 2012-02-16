@@ -11,7 +11,7 @@ exports.setup = function( app ){
     var sockets = io.listen(app).sockets;
     sockets.on("connection", function( socket ){
         
-        socket.on("sid", function( sid ){
+        socket.on("login", function( sid ){
             logger.debug("get session info: " + sid);
             db.collection("session").findOne({_id: sid}, function(err, session){
                 if( err ) logger.error( err );
@@ -49,11 +49,17 @@ exports.setup = function( app ){
             }
         });
         
-        socket.on("disconnect", function(){
+        function exit(){
             var pt = socket.passport;
             socket.broadcast.emit("user-logout", {passport: pt, name: socket.name})
             delete users[pt];
             delete users_client[pt];
+            socket.destroy();
+        }
+        socket.on("logout", function(){
+            exit();
+            socket.emit("disconnect");
         });
+        socket.on("disconnect", exit);
     });
 }

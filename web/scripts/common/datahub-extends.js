@@ -7,11 +7,16 @@ dh.require = function( k, fn ){
     var sc = this.shortcut[k];
     var url = sc.url;
     url = $.isFunction(url) ? url() : url;
-    if( sc && sc.url ){
+    if( sc && sc.url && sc.status !== "loading" ){
         require("ajax").get( url, function( data ){
+            sc.status = "loaded";
             dh.put(k, data);
             fn && fn( data );
         });
+        sc.status = "loading";
+        setTimeout(function(){
+            sc.status = "timeout";
+        }, 5000);
     }
 }
 dh.listen = function( k, fn ){
