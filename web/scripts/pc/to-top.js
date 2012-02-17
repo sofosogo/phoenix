@@ -1,12 +1,14 @@
 (function(){
 
 var opacity = 0,
+    $win = $(window),
     $totop;
-$(window).scroll(function(){
-    if( window.scrollY > 20 && opacity === 0 ){
+$win.scroll(function(){
+    var scrollTop = $win.scrollTop();
+    if( scrollTop > 20 && opacity === 0 ){
         opacity = 1;
         getToTop().fadeIn("normal");
-    }else if( window.scrollY <= 20 && opacity === 1 ){
+    }else if( scrollTop <= 20 && opacity === 1 ){
         opacity = 0;
         getToTop().fadeOut("normal");
     }

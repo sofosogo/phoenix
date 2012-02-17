@@ -264,8 +264,10 @@ header{
 }
 .good-desc{
     max-width: 900px;
+    padding: 10px;
     border: 2px solid #ccc;
     text-align: center;
+    overflow-x: hidden;
 }
 .good-desc p{
     text-align: center;
