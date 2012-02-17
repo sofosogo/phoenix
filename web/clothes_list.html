@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
     <link rel="stylesheet" href="/css/pc.css"/>
+    <!--[if lt IE 7]>
+    <link rel="stylesheet" href="/css/ie6.css"/>
+    <script type="text/javascript" src="/scripts/pc/iepngfix_tilebg.js"></script>
+    <![endif]-->
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -30,7 +34,7 @@
         <ul class="group" each="c" bind="data">
             <li class="clothes-title">
                 <a href="/clothes.html?id={{id}}" target="_blank">
-                    <img imgsrc="{{imgs.0}}" width="120" height="200">
+                    <img imgsrc="{{imgs.0}}">
                     <div class="{{isNew}}"></div>
                     <div class="price">{{price}}</div>
                     <p>{{name}}</p>
@@ -54,7 +58,7 @@
             }
         });
         var opt = {
-            click: function( page ){ getGoods( page ); }
+            click: function( page ){ alert(page);getGoods( page ); }
         }
         var p = new pagination(opt);
         p.$view.appendTo( $(".body") );

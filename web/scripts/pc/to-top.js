@@ -2,6 +2,7 @@
 
 var opacity = 0,
     $win = $(window),
+    isIE6 = $.browser.msie && $.browser.version === "6.0",
     $totop;
 $win.scroll(function(){
     var scrollTop = $win.scrollTop();
@@ -12,7 +13,17 @@ $win.scroll(function(){
         opacity = 0;
         getToTop().fadeOut("normal");
     }
+    if( isIE6 && $totop ){
+        $totop.css({position: "absolute", top: (scrollTop + $win.height() - 200)+"px"});
+    }
 });
+if( isIE6 ){
+    $win.resize(function(){
+        if( $totop ){
+            $totop.css({position: "absolute", top: ($win.scrollTop() + $win.height() - 200)+"px"});
+        }
+    });
+}
 
 function getToTop(){
     if( !$totop ){

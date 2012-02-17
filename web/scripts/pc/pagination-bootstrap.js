@@ -5,7 +5,7 @@ var p = window.pagination = function( opt ){
     this.$ul = this.$view.find("ul");
     this.$total = this.$view.find(".total-size");
     this.$view.delegate("a", "click", function(e){
-        var page = this.getAttribute("href")
+        var page = this.getAttribute("page")
         if( page && opt.click ){
             opt.click( page );
         }
@@ -56,7 +56,8 @@ function genIndex(total, curpage, page, title){
     if( disabled ){
         clazz = title ? "disabled": "active";
     }
-    return "<li class='" + clazz + "'><a" + href + ">" + (title || page) + "</a></li>";
+    // here we don't use href but also page, hack for IE6, href="http://host/2"
+    return "<li class='" + clazz + "'><a page='" + page + "' " + href + ">" + (title || page) + "</a></li>";
 }
 var default_view = '<div class="pagination"><ul></ul><div class="total-size"></div></div>';
 

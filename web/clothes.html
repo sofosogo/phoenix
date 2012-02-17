@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
     <link rel="stylesheet" href="/css/pc.css"/>
     <!--[if lt IE 7]>
-    <link rel="stylesheet" href="/css/position-fixed-ie6.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/ie6.css"/>
+    <script type="text/javascript" src="/scripts/pc/iepngfix_tilebg.js"></script>
     <![endif]-->
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,10 +34,10 @@
         <div>
             <div class="good-img">
                 <div class="good-big-img">
-                    <img imgsrc="{{imgs.0}}" width="150" height="250">
+                    <img imgsrc="{{imgs.0}}">
                 </div>
                 <div class="good-img-list" each="c" bind="imgs">
-                    <img imgsrc="{{.}}">
+                    <img imgsrc="{{.}}" data-src="{{.}}">
                 </div>
             </div>
             <div class="good-info">
@@ -81,7 +82,8 @@
             document.title += " - " + data.name;
         });
         $(".good-img-list").delegate("img", "click", function(e){
-            $big.attr("src", this.src);
+            // hack for IE6, this.src return blank.gif.
+            $big.attr("src", this.getAttribute("data-src"));
         })
     </script>
 </body>
