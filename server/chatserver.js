@@ -33,7 +33,10 @@ exports.setup = function( app ){
         });
         
         socket.on("msg", function( msg ){
-            // validate
+            if( !msg.msg || !msg.to ) return;
+            // XSS
+            msg.msg = msg.msg.replace(/\</g, "&lt;").replace(/\>/g, "&gt;");
+            
             var to = msg.to;
             msg.toname = users_client[to];
             msg.from = socket.passport;
