@@ -37,6 +37,10 @@ var dit = window.dit = {
         }
     }
 },
+    alias = {
+        // imgsrc -> src, using imgsrc to avoid an error request.
+        "imgsrc": "src"
+    },
     protos = {},
     toString = Object.prototype.toString,
     join = Array.prototype.join,
@@ -175,6 +179,8 @@ function scanAttr( node, phs, prefix ){
             field = getField( prefix, field );
             var ph = {f: field, m: match},
                 attr = attrs[i].nodeName,
+                // imgsrc -> src, using imgsrc to avoid an error request.
+                attr = alias[attr] ? alias[attr] : attr,
                 handler = {
                 fill: function( v ){
                     var val = this._ori, ph, _tm;
