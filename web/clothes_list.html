@@ -6,8 +6,8 @@
     <link rel="bookmark" href="/images/phoenix.ico" />
     <link rel="shortcut icon" href="/images/phoenix.ico" />
     <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
-    <link rel="stylesheet" href="/css/pc.css"/>
+    <link rel="stylesheet" href="/css/light.css"/>
+    <link rel="stylesheet" href="/css/clothes-list.css"/>
     <!--[if lt IE 7]>
     <link rel="stylesheet" href="/css/ie6.css"/>
     <script type="text/javascript" src="/scripts/pc/iepngfix_tilebg.js"></script>
@@ -16,38 +16,75 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="light">
+<article>
     <header>
-        <div id="logo">
-            <a href="/index.html">
-                <img src="/images/logo.png">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" width="221" height="91" alt="" title="" border="0" />
             </a>
         </div>
-        <ul id="menu">
-            <li><a href="/index.html">首页推荐</a></li>
-            <li class="active"><a href="/clothes_list.html">所有旗袍</a></li>
-            <li><a href="/contact_us.html">联系我们</a></li>
-        </ul>
-        <div class="clear"></div>
+        <div id="menu_tab">                                     
+            <ul class="menu">
+                <li class="divider"></li>                                                                               
+                <li><a class="nav" href="/index.html">首页推荐</a></li>
+                <li><a class="nav_selected" href="/clothes_list.html">所有旗袍</a></li>
+                <li><a class="nav" href="/contact_us.html">联系我们</a></li>
+            </ul>
+        </div>
+        <div class="search_tab">
+            <input type="text" class="search" placeholder="search" />
+            <input type="image" src="images/search.gif" class="search_bt" />
+        </div>
     </header>
     <div class="body">
-        <ul class="group" each="c" bind="data">
-            <li class="clothes-title">
-                <a href="/clothes.html?id={{id}}" target="_blank">
-                    <img imgsrc="{{imgs.0}}">
-                    <div class="{{isNew}}"></div>
-                    <div class="price">{{price}}</div>
-                    <p>{{name}}</p>
-                </a>
-            </li>
-        </ul>
+        <aside>
+            <ul id="left_menu">
+                <li><span>按照面料划分</span></li>
+                <li><a href="">提花棉旗袍</a></li>
+                <li><a href="">弹力棉旗袍</a></li>
+                <li><a href="">真丝旗袍</a></li>
+                <li><a href="">香云纱旗袍</a></li>
+                <li class="selected"><a href="">棉麻旗袍</a></li>
+                <li><a href="">丝绒旗袍</a></li>
+                <li><a href="">蕾丝旗袍</a></li>
+                <li><a href="">锦缎旗袍</a></li>
+                <li><a href="">其他面料</a></li>
+                <li><span>按照季节划分</span></li>
+                <li><a href="">春秋天旗袍</a></li>
+                <li><a href="">夏天旗袍</a></li>
+                <li><a href="">冬天旗袍</a></li>
+            </ul>
+            <div class="submenu_pic">
+                <img src="/images/submenu_pic.gif">
+            </div>
+        </aside>
+        <section class="content clearfix">
+            <div class="title">
+                <a href="/index.html">首页</a>&lt;&lt; 棉麻旗袍
+            </div>
+            <ul class="group" each="c" bind="data">
+                <li class="product_box">
+                    <img class="prod_image" title="" alt="" src="{{imgs.0}}">
+                    <div class="product_details">
+                        <div class="prod_title">{{name}}</div>
+                        <p class="prod_summary">{{summary}}</p>
+                        <p class="price"><span class="price">{{price}}</span></p>
+                        <a class="details" href="/clothes.html?id={{id}}" target="_blank">
+                            <img src="images/details.gif">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </section>
     </div>
     <footer>
         <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
     </footer>
+</article>
     <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
-    <script type="text/javascript" src="/scripts/pc/pagination-bootstrap.js"></script>
+    <script type="text/javascript" src="/scripts/pc/pagination.js"></script>
     <script type="text/javascript">
         var $ul = $(".group");
         var temp = dit.create( $ul[0], {
@@ -55,20 +92,29 @@
                 if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
                     return "new-good";
                 }
+            },
+            summary: function( v, data ){
+                return v ? v.replace(/<(.)*>/g, " ") : "";
             }
         });
         var opt = {
-            click: function( page ){ alert(page);getGoods( page ); }
+            click: function( page ){ getGoods( page ); }
         }
         var p = new pagination(opt);
-        p.$view.appendTo( $(".body") );
+        p.$view.appendTo( $(".content") );
         function getGoods( page ){
-            $.get("/clothes?pagesize=8&page=" + (page || 1), function(result){
+            $.get("/clothes?page=" + (page || 1), function(result){
                 temp.fill( result );
-                p.set(result.total, 8, result.page);
+                p.set(result.total, 10, result.page);
             });
         }
-        getGoods();
+        getGoods();function M(){
+    T()
+}
+function T(){
+   console.log(arguments.callee)
+}
+
     </script>
 </body>
 </html>

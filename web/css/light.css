@@ -1,0 +1,352 @@
+
+body{
+    font-family: "微软雅黑", Arial, Helvetica, sans-serif;
+}
+body.light{
+    background: url(/images/bg.jpg) no-repeat scroll top center #D4825C;
+}
+article{
+    width: 902px;
+    height: auto;
+    margin: auto;
+    padding: 0;
+}
+header{
+    height: 109px;
+    width: 902px;
+    margin: auto;
+    background: url(/images/top_menu_bg.png) no-repeat;
+}
+.body{
+    background-color: #2A0A0D;
+    margin-top: 20px;
+    clear: both;
+}
+footer{
+    background-color: #2A0A0D;
+    line-height: 35px;
+    clear: both;
+    color: #73363C;
+}
+.logo{
+    float: left;
+    padding: 14px 0 0;
+}
+/*---------------- menu tab----------------------*/
+#menu_tab{
+    width:470px;
+    float:left;
+    padding:0px;
+}
+ul.menu {
+    display: block;
+    width:470px;
+    margin: auto; 
+    padding:65px 0 0 0;
+    list-style: none; 
+}
+ul.menu li {
+    display:inline;
+    font-size:13px;
+    font-weight:bold;
+    line-height:28px;
+}
+ul.menu li.divider {
+    display:block;
+    float:left;
+    width:1px;
+    height:31px;
+    padding:0px ;
+    margin:0px;
+    background: #6f414c;
+}
+
+a.nav:link, a.nav:visited {
+    display: block;
+    width: auto;
+    float: left;
+    padding: 0px;
+    margin:0px 14px 0px 14px;
+    text-align: center;
+    text-decoration: none;
+    color:#fff;
+}
+a.nav_selected:link, a.nav_selected:visited {
+    display:block; 
+    float:left; 
+    padding:0px; 
+    width: auto;
+    margin:0px 14px 0px 14px;
+    text-align:center;
+    text-decoration:none; 
+    color: #BF2F68;
+}
+
+a.nav:hover {
+    color: #BF2F68;
+    text-decoration:none;
+}
+/*-----------------search_tab----------------*/
+.search_tab{
+    float:left;
+    width:200px;
+    padding:70px 0 0 0;
+}
+input.search{
+    width:150px;
+    height:20px;
+    border:none;
+    float:left;
+    background-color:#8c4e67;
+    color:#b48e9b;
+    padding:0 0 0 5px;
+}
+input.search_bt{
+    float:left;
+    padding:0 0 0 5px;
+}
+.left_sidebar{
+    width:180px;
+    float:left;
+}
+.submenu_pic{
+    padding:10px 0 0 28px;
+}
+/*-----------------main----------------*/
+#slideshow{
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+#slideshow li{
+    list-style: none;
+    margin-left: 0;
+}
+#slideshow .featimg{
+    width: 500px;
+    height: 500px;
+    float: left;
+}
+#slideshow .pre{
+    position: absolute;
+    top: 200px;
+    width: 150px;
+    height: 250px;
+    opacity: 0.5;
+    z-index: 1;
+}
+#slideshow .img{
+    position: absolute;
+    left: 100px;
+    width: 300px;
+    height: 500px;
+    z-index: 2;
+}
+#slideshow .post{
+    position: absolute;
+    top: 200px;
+    left: 350px;
+    width: 150px;
+    height: 250px;
+    opacity: 0.5;
+    z-index: 1;
+}
+.feattxt{
+    width: 335px;
+    max-height: 330px;
+    padding: 30px;
+    overflow: hidden;
+    float: left;
+    color: #D4847F;
+}
+.feattxt p{
+    font-size: 16px;
+    line-height: 30px;
+}
+.featbtn{
+    width: 335px;
+    max-height: 100px;
+    padding: 30px;
+    overflow: hidden;
+    float: left;
+}
+.clear {
+    clear: both;
+    display: block;
+    height: 1px;
+    overflow: hidden;
+    width: 900px;
+}
+
+.copyright{
+    width: 900px;
+    font-size: 12px;
+    font-family: arial;
+    text-align: center;
+}
+
+.page{
+    height: 50px;
+    margin: 10px 0 0;
+    text-align: center;
+    background: -webkit-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:    -moz-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:     -ms-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:      -o-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:         linear-gradient(left, #F2F2F2, #444, #F2F2F2);
+    background: url(/images/page-bg.jpg) repeat-y\9;
+    *background:url(/images/page-bg.jpg) repeat-y;
+}
+.page .preview{
+    width: 30px;
+    height: 50px;
+    margin: 0 5px 0 0;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+    cursor: pointer;
+}
+.page .active{
+    border-left: 1px solid #999900;
+    border-right: 1px solid #999900;
+    background: #fff;
+}
+.hidden{
+    display: none;
+}
+
+
+.good-img{
+    width: 400px;
+    margin: 20px 0 0;
+    float: left;
+}
+.good-big-img{
+    text-align: center;
+}
+.good-big-img img{
+    width: 150px;
+    height: 250px;
+    border: 1px solid #bbb;
+}
+.good-img-list{
+    height: 50px;
+    text-align: center;
+    background: -webkit-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:    -moz-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:     -ms-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:      -o-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
+    background:         linear-gradient(left, #F2F2F2, #444, #F2F2F2);
+    background: url(/images/bg121-400.jpg) repeat-y\9;
+    *background:url(/images/bg121-400.jpg) repeat-y;
+}
+.good-img-list img{
+    width: 30px;
+    height: 50px;
+    margin: 0 5px 0 0;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #999999;
+    cursor: pointer;
+}
+.good-info{
+    width: 400px;
+    height: 320px;
+    margin: 20px 0 0 100px;
+    float: left;
+}
+.good-desc-wrapper{
+    max-width: 900px;
+    padding: 10px 0 0;
+}
+.good-desc{
+    max-width: 900px;
+    padding: 10px;
+    text-align: center;
+    overflow-x: hidden;
+}
+.good-desc p{
+    text-align: center;
+}
+.red {
+    color: #b00;
+}
+
+.our-shop{
+    float: left;
+    text-align: center;
+}
+.our-shop img{
+    border: 2px solid #333;
+    
+}
+.our-shop p{
+    margin-top: 10px;
+    text-align: center;
+}
+.address{
+    float: left;
+    margin-left: 50px;
+}
+.to-top{
+    position: fixed; 
+    bottom: 100px; 
+    right: 100px; 
+    width: 1.2em; 
+    z-index: 9999; 
+    text-align: center; 
+    background: #000; 
+    color: #fff; 
+    font-size: 19px; 
+    outline: none; 
+    line-height: 1.2em; 
+    border-radius: 4px;
+}
+
+/*html5*/
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+    display: block;
+}
+
+/*---------------------pagination-------------------------*/
+div.pagination {
+    float: left;
+    font-size: 10px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    clear: both;
+}
+div.pagination a {
+    border: 1px solid #DDD;
+    color: #D8325D;
+    margin-right: 2px;
+    padding: 2px 5px;
+    text-decoration: none;
+}
+div.pagination a:hover, div.pagination a:active {
+    background: #D8325D;
+    color: #FFF;
+}
+div.pagination span{
+    border: 1px solid #DDD;
+    color: #CCC;
+    margin-right: 2px;
+    padding: 2px 5px;
+}
+div.pagination span.current {
+    background: #D8325D;
+    color: #FFF;
+}
+
+/* -------float:left的子节点并不撑开父节点（高度）-----------*/
+.clearfix:after{
+    display: block;
+    height: 0;
+    content: ".";
+    clear: both;
+    visibility: hidden;
+}
+/*IE hack*/
+* html .clearfix{
+    height: 1%;
+}

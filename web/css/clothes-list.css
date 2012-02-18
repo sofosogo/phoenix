@@ -1,0 +1,139 @@
+
+/*----------------------aside-----------------------*/
+aside{
+    float: left;
+    width: 180px;
+}
+.submenu_pic {
+    padding: 10px 0 0 28px;
+}
+#left_menu {
+    float: left;
+    left: -15px;
+    position: relative;
+    top: -10px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 177px;
+}
+#left_menu ul {
+    
+}
+#left_menu li {
+    display: block;
+}
+#left_menu li a {
+    background-color: #D4847F;
+    border-bottom: 1px solid #DA9591;
+    color: #FFFFFF;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 0 0 25px;
+    text-align: left;
+    text-decoration: none;
+}
+#left_menu li.selected a,
+#left_menu li a:hover {
+    background: url(/images/left_menu_bullet.gif) no-repeat scroll 5px 8px #B0335D;
+}
+#left_menu li span {
+    background-color: #D4847F;
+    border-bottom: 1px solid #DA9591;
+    color: #333;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/*---------------------- title -----------------------*/
+section.content{
+    margin-left: 180px;
+}
+.title {
+    color: #FFFFFF;
+    padding: 5px 0 10px;
+}
+.title a {
+    color: #DF6195;
+    text-decoration: underline;
+}
+
+/*---------------------- list -----------------------*/
+.group{
+    margin: 10px 0 0;
+}
+
+.group .product_box {
+    border: 1px solid #9E1C50;
+    float: left;
+    height: auto;
+    margin: 0 0 10px 10px;
+    padding: 8px;
+    width: 320px;
+    list-style: none;
+    border-radius: 5px; 
+    box-shadow: 1px 1px 3px #9E1C50;
+}
+.product_box_details {
+    width: 640px;
+    height: auto;
+    margin: 0 0 0 8px;
+    padding: 8px;
+    float: left;
+    border: 1px solid #9E1C50;
+}
+img.prod_image {
+    width: 120px;
+    height: 200px;
+    float: left;
+    padding: 0 10px 0 0;
+}
+.product_details {
+    float: left;
+    width: 185px;
+    max-height: 200px;
+}
+.product_details_wide {
+    float: left;
+    width: 450px;
+}
+.prod_title {
+    position: relative;
+    left: -15px;
+    width: 200px;
+    color: #eee;
+    padding: 0 10px 0 0;
+    max-height: 46px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 2px #F0335D, 2px 2px 5px #B0335D;
+}
+.prod_title:first-letter{
+    font-size: 20px;
+}
+.prod_summary{
+    color: #D4847F;
+    font-size: 13px;
+    max-height: 93px;
+    margin: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+span.price {
+    color: #A6F2A4;
+    font-size: 20px;
+    font-family: Georgia;
+}
+p.price:before{
+    color: #D4847F;
+    content: "￥";
+    font-size: 13px;
+}
+a.details {
+    display: block;
+    padding: 5px 0 0;
+}

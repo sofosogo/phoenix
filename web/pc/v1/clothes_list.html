@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>一笑旗袍</title>
+    <link rel="bookmark" href="/images/phoenix.ico" />
+    <link rel="shortcut icon" href="/images/phoenix.ico" />
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-2.0.0.css"/>
+    <link rel="stylesheet" href="/css/pc.css"/>
+    <!--[if lt IE 7]>
+    <link rel="stylesheet" href="/css/ie6.css"/>
+    <script type="text/javascript" src="/scripts/pc/iepngfix_tilebg.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <a href="/index.html">
+                <img src="/images/logo.png">
+            </a>
+        </div>
+        <ul id="menu">
+            <li><a href="/index.html">首页推荐</a></li>
+            <li class="active"><a href="/clothes_list.html">所有旗袍</a></li>
+            <li><a href="/contact_us.html">联系我们</a></li>
+        </ul>
+        <div class="clear"></div>
+    </header>
+    <div class="body">
+        <ul class="group" each="c" bind="data">
+            <li class="clothes-title">
+                <a href="/clothes.html?id={{id}}" target="_blank">
+                    <img imgsrc="{{imgs.0}}">
+                    <div class="{{isNew}}"></div>
+                    <div class="price">{{price}}</div>
+                    <p>{{name}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <div class="copyright">Copyright©2012  一笑旗袍  版权所有</div>
+    </footer>
+    <script type="text/javascript" src="/scripts/lib/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="/scripts/lib/dit.js"></script>
+    <script type="text/javascript" src="/scripts/pc/pagination-bootstrap.js"></script>
+    <script type="text/javascript">
+        var $ul = $(".group");
+        var temp = dit.create( $ul[0], {
+            isNew: function( v, data ){
+                if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
+                    return "new-good";
+                }
+            }
+        });
+        var opt = {
+            click: function( page ){ alert(page);getGoods( page ); }
+        }
+        var p = new pagination(opt);
+        p.$view.appendTo( $(".body") );
+        function getGoods( page ){
+            $.get("/clothes?pagesize=8&page=" + (page || 1), function(result){
+                temp.fill( result );
+                p.set(result.total, 8, result.page);
+            });
+        }
+        getGoods();
+    </script>
+</body>
+</html>

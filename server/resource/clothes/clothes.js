@@ -9,8 +9,8 @@ var logger = require("log4js").getLogger(__filename);
 exports.path = "/clothes";
 
 exports.get = function(req, res, params){
-    var page = parseInt(params.page),
-        pagesize = parseInt(params.pagesize);
+    var page = Math.abs(parseInt(params.page)) || 1,
+        pagesize = parseInt(params.pagesize) || 10,
         skip = (page - 1) * pagesize,
         len = 0,
         query = obj_utils.partial(params, "recommend");
