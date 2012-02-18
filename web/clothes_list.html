@@ -63,7 +63,7 @@
         </aside>
         <section class="content clearfix">
             <div class="title">
-                <a href="/index.html">首页</a>&lt;&lt; 棉麻旗袍
+                <a href="/index.html">首页</a>&lt;&lt; 旗袍搜索（<span></span>）
             </div>
             <ul class="group" each="c" bind="data">
                 <li class="product_box">
@@ -91,7 +91,18 @@
         var $ul = $(".group"),
             $cf = $("li[cf]"),
             $cs = $("li[cs]"),
-            search = {page: 1};
+            cfs = {},
+            css = {},
+            search = {page: 1, fabric: "", season: ""},
+            $seachShow = $(".title span");
+        $cf.each(function(i, it){
+            it = $(it);
+            cfs[it.attr("cf")] = it.children("a").html();
+        });
+        $cs.each(function(i, it){
+            it = $(it);
+            css[it.attr("cs")] = it.children("a").html();
+        });
         $cf.click(function(){
             var cf = this.getAttribute("cf");
             if( cf === search.fabric ) return;
@@ -131,6 +142,7 @@
                 temp.fill( result );
                 p.set(result.total, 10, result.page);
             });
+            $seachShow.html( cfs[search.fabric] + ", " + css[search.season] );
         }
         getGoods();
     </script>
