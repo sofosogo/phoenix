@@ -20,6 +20,9 @@ exports.get = function(req, res, params){
         if( params.min_price ) p.$gte = parseInt(params.min_price);
         if( params.max_price ) p.$lte = parseInt(params.max_price);
     }
+    if( params.fabric ) query["category.fabric"] = {"$in": params.fabric};
+    if( params.season ) query["category.season"] = {"$in": params.season};
+    
     logger.info( "query clothes: " + util.inspect(query) );
     
     var cursor = db.collection("clothes").find( query );

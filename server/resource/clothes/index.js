@@ -67,7 +67,7 @@ exports.post = function(req, res, params){
         sort = [],
         update = { 
             $set: obj_utils.partial(params, 
-                "name", "price", "tburl", "desc", "imgs", "recommend", "size", "color")
+                "name", "price", "tburl", "desc", "imgs", "recommend", "size", "category", "color")
         },
         options = {};
     db.collection("clothes").findAndModify(query, sort, update, options, function(err, clothes){

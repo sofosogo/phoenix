@@ -34,17 +34,19 @@ var prototype = {
         var data = result.data,
             cols = this.cols,
             $tr, dlen, clen, val, gen;
-        this.show().view("tbody").empty();
+        this.hide().view("tbody").empty();
         this.$total.html("共有" + result.total + "条记录。");
-        for( var i = 0; i < this.pagesize && i < data.length; i++ ){
-            $tr = $("<tr>");
-            for( var j = 0, len = cols.length; j < len; j++ ){
-                val = data[i][cols[j].name];
-                gen = cols[j].gen;
-                $("<td>").append( gen ? gen(val, data[i]) : val )
-                    .appendTo( $tr );
+        if( data ){
+            for( var i = 0; i < this.pagesize && i < data.length; i++ ){
+                $tr = $("<tr>");
+                for( var j = 0, len = cols.length; j < len; j++ ){
+                    val = data[i][cols[j].name];
+                    gen = cols[j].gen;
+                    $("<td>").append( gen ? gen(val, data[i]) : val )
+                        .appendTo( $tr );
+                }
+                this.view("tbody").append( $tr );
             }
-            this.view("tbody").append( $tr );
         }
         this.pagination.set(result.total, this.pagesize, result.page);
         this.show();

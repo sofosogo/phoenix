@@ -14,6 +14,29 @@ function condition(req, res){
     if( pathname.match(/^\/upload$/) ) return false;
     return true;
 }
+
+function handleParams( req, next ){
+    var params = req.params,
+        field, value;
+    if( params ){
+        for( var field in params ){
+            value = params[field];
+            if( field.indexOf("[]") !== -1 ){
+                delete params[field];
+                field = field.replace("[]", "");
+                if( typeof value === "string" ) value = [value];
+                params[field] = value;
+            }else if( field.match(/([a-z0-9]+)\[([a-z0-9]+)\]/i) ){
+                delete params[field];
+                if( !params[RegExp.$1] ) params[RegExp.$1] = {};
+                params[RegExp.$1][RegExp.$2] = value;
+            }
+        }
+    };
+    logger.info( util.inspect(params) );
+    logger.info("end");
+    next();
+}
     
 exports.filter = function(req, res, next){
     if( !condition(req, res) ) return next();
@@ -26,9 +49,7 @@ exports.filter = function(req, res, next){
     req.params = req.params = querystring.parse( uri.query );
     
     if( method === "get" ){
-        logger.info( util.inspect(req.params) );
-        logger.info("end");
-        next();
+        handleParams(req, next);
     }else{
         var form = new formidable.IncomingForm();
         form.uploadDir = path.resolve("./web/upload/temp/");
@@ -37,19 +58,13 @@ exports.filter = function(req, res, next){
                 error.throw(res, 500);
             })
             .on("field", function(field, value){
-                if( field.indexOf("[]") !== -1 ){
-                    field = field.replace("[]", "");
-                    if( typeof value === "string" ) value = [value];
-                }
                 req.params[field] = value;
             })
             .on('file', function(field, file){
                 req.params[field] = file;
             })
             .on("end", function(){
-                logger.info( util.inspect(req.params) );
-                logger.info("end");
-                next();
+                handleParams(req, next);
             })
         .parse(req);
     }
