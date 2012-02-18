@@ -41,19 +41,21 @@
         <aside>
             <ul id="left_menu">
                 <li><span>按照面料划分</span></li>
-                <li><a href="">提花棉旗袍</a></li>
-                <li><a href="">弹力棉旗袍</a></li>
-                <li><a href="">真丝旗袍</a></li>
-                <li><a href="">香云纱旗袍</a></li>
-                <li class="selected"><a href="">棉麻旗袍</a></li>
-                <li><a href="">丝绒旗袍</a></li>
-                <li><a href="">蕾丝旗袍</a></li>
-                <li><a href="">锦缎旗袍</a></li>
-                <li><a href="">其他面料</a></li>
-                <li><span>按照季节划分</span></li>
-                <li><a href="">春秋天旗袍</a></li>
-                <li><a href="">夏天旗袍</a></li>
-                <li><a href="">冬天旗袍</a></li>
+                <li cf="" class="selected"><a href="javascript:void 0;">所有面料</a></li>
+                <li cf="TH"><a href="javascript:void 0;">提花棉旗袍</a></li>
+                <li cf="TL"><a href="javascript:void 0;">弹力棉旗袍</a></li>
+                <li cf="ZS"><a href="javascript:void 0;">真丝旗袍</a></li>
+                <li cf="XY"><a href="javascript:void 0;">香云纱旗袍</a></li>
+                <li cf="MM"><a href="javascript:void 0;">棉麻旗袍</a></li>
+                <li cf="SR"><a href="javascript:void 0;">丝绒旗袍</a></li>
+                <li cf="LS"><a href="javascript:void 0;">蕾丝旗袍</a></li>
+                <li cf="JD"><a href="javascript:void 0;">锦缎旗袍</a></li>
+                <li cf="QT"><a href="javascript:void 0;">其他面料</a></li>
+                <li ><span>按照季节划分</span></li>
+                <li cs="" class="selected"><a href="javascript:void 0;">所有季节</a></li>
+                <li cs="CQ"><a href="javascript:void 0;">春秋天旗袍</a></li>
+                <li cs="XT"><a href="javascript:void 0;">夏天旗袍</a></li>
+                <li cs="DT"><a href="javascript:void 0;">冬天旗袍</a></li>
             </ul>
             <div class="submenu_pic">
                 <img src="/images/submenu_pic.gif">
@@ -86,7 +88,26 @@
     <script type="text/javascript" src="/scripts/lib/dit.js"></script>
     <script type="text/javascript" src="/scripts/pc/pagination.js"></script>
     <script type="text/javascript">
-        var $ul = $(".group");
+        var $ul = $(".group"),
+            $cf = $("li[cf]"),
+            $cs = $("li[cs]"),
+            search = {page: 1};
+        $cf.click(function(){
+            var cf = this.getAttribute("cf");
+            if( cf === search.fabric ) return;
+            search.fabric = cf;
+            getGoods();
+            $cf.removeClass("selected");
+            this.className = "selected";
+        });
+        $cs.click(function(){
+            var cs = this.getAttribute("cs");
+            if( cs === search.season ) return;
+            search.season = cs;
+            getGoods();
+            $cs.removeClass("selected");
+            this.className = "selected";
+        });
         var temp = dit.create( $ul[0], {
             isNew: function( v, data ){
                 if( new Date().getTime() - data.created_dt < 3600000*24*3 ){
@@ -95,26 +116,23 @@
             },
             summary: function( v, data ){
                 return v ? v.replace(/<(.)*>/g, " ") : "";
+            },
+            price: function( v ){
+                return v ? v.toFixed(2) : v;
             }
         });
         var opt = {
-            click: function( page ){ getGoods( page ); }
+            click: function( p ){ search.page = p; getGoods(); }
         }
         var p = new pagination(opt);
         p.$view.appendTo( $(".content") );
-        function getGoods( page ){
-            $.get("/clothes?page=" + (page || 1), function(result){
+        function getGoods(){
+            $.get("/clothes", search, function(result){
                 temp.fill( result );
                 p.set(result.total, 10, result.page);
             });
         }
-        getGoods();function M(){
-    T()
-}
-function T(){
-   console.log(arguments.callee)
-}
-
+        getGoods();
     </script>
 </body>
 </html>

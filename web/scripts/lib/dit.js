@@ -77,14 +77,15 @@ function fill( phs, fields, data, opt, append ){
         }
         if( val === void 0 && append ) continue;
         if( val === void 0 || val === null ) val = "";
-        if( val === phs[field].val ) continue;
+        // below is incorrect, because user action won't change phs[field].val.
+        // OR phs[field].val is a pointer;
+        // if( val === phs[field].val ) continue;
         phs[field].val = val;
         handlers = phs[field].handlers;
         for( var i = 0; i < handlers.length; i++ ){
             handlers[i].fill( val );
         }
     }
-    
 }
 
 function clean( phs ){
@@ -300,10 +301,11 @@ protos.radio = function(){};
 protos.radio.prototype = {
     fill: function( val ){
         var nodes = this.nodes,
-            len = nodes.length;
+            len = nodes.length,
+            v = "" + val;
         for( var i = 0; i < len; i++ ){
             nodes[i].checked = false;
-            if( nodes[i].value === "" + val ){
+            if( nodes[i].value === v ){
                 nodes[i].checked = true;
             }
         }
