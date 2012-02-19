@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>HTML5地理定位</title>
+</head>
+<body>
+    <div id="result"></div>
+    <script type="text/javascript">
+        var result = document.getElementById("result");
+        result.append = function(){
+            result.innerHTML += Array.prototype.join.call(arguments, " ");
+        }
+        
+        if( "geolocation" in navigator ){
+            navigator.geolocation.getCurrentPosition(function( position ){
+                var coords = position.coords;
+                var msg = "";
+                for( var k in coords ){
+                    if( typeof coords[k] === "function" ) continue;
+                    msg += "coords." + k + ": " + coords[k] + "<br/>"
+                }
+                result.append(msg);
+            }, function( error ){
+                var msg;
+                switch(error.code) { 
+                    case error.PERMISSION_DENIED: 
+                        msg = "Permission was denied"; 
+                        break; 
+                    case error.POSITION_UNAVAILABLE: 
+                        msg = "Location data not available"; 
+                        break; 
+                    case error.TIMEOUT: 
+                        msg = "Location request timeout"; 
+                        break; 
+                    case error.UNKNOWN_ERROR: 
+                        msg = "An unspecified error occurred"; 
+                        break; 
+                    default: 
+                        msg = "Who knows what happened…"; 
+                        break;
+                }
+                result.append( msg );
+            });
+        }else{
+            result.append( "Your browser dosen't support geolocation." );
+        }
+    </script>
+</body>
+</html>

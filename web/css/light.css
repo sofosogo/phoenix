@@ -49,43 +49,44 @@ ul.menu li {
     display:inline;
     font-size:13px;
     font-weight:bold;
-    line-height:28px;
+    line-height:18px;
 }
 ul.menu li.divider {
     display:block;
     float:left;
     width:1px;
     height:31px;
-    padding:0px ;
     margin:0px;
     background: #6f414c;
 }
-
-a.nav:link, a.nav:visited {
+a.nav, a.nav_selected{
     display: block;
-    width: auto;
+    margin:0px 14px;
     float: left;
-    padding: 0px;
-    margin:0px 14px 0px 14px;
-    text-align: center;
+    padding: 5px 0 0;
     text-decoration: none;
+    -webkit-box-reflect: below 0 -webkit-linear-gradient(transparent, transparent 50%, rgba(255,255,255,.4));
+}
+a.nav:link, a.nav:visited {
     color:#fff;
 }
-a.nav_selected:link, a.nav_selected:visited {
-    display:block; 
-    float:left; 
-    padding:0px; 
-    width: auto;
-    margin:0px 14px 0px 14px;
-    text-align:center;
-    text-decoration:none; 
+a.nav_selected:link, 
+a.nav:hover,
+a.nav_selected:visited {
     color: #BF2F68;
 }
-
-a.nav:hover {
-    color: #BF2F68;
-    text-decoration:none;
+/*
+a.nav_selected:link, a.nav:hover{
+    background: #BF2F68 -webkit-linear-gradient(-15deg,#BF2F68 5%,rgba(255,255,255,.7),rgba(255,255,255,.9),rgba(255,255,255,.7),#BF2F68 10%) no-repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: cliptext 2s linear infinite;
 }
+@-webkit-keyframes cliptext{
+    0% {background-position: left 0;}
+    100% {background-position: 100px 0;}
+}
+*/
 /*-----------------search_tab----------------*/
 .search_tab{
     float:left;
@@ -133,6 +134,7 @@ input.search_bt{
     width: 150px;
     height: 250px;
     opacity: 0.5;
+    filter: alpha(opacity=50);
     z-index: 1;
 }
 #slideshow .img{
@@ -149,6 +151,7 @@ input.search_bt{
     width: 150px;
     height: 250px;
     opacity: 0.5;
+    filter: alpha(opacity=50);
     z-index: 1;
 }
 .feattxt{
@@ -201,14 +204,17 @@ input.search_bt{
     width: 30px;
     height: 50px;
     margin: 0 5px 0 0;
-    border-left: 1px solid #999999;
-    border-right: 1px solid #999999;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
     cursor: pointer;
 }
-.page .active{
-    border-left: 1px solid #999900;
-    border-right: 1px solid #999900;
-    background: #fff;
+.page img.active, .page img:hover{
+    background: #eee;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0 , 0.5);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 .hidden{
     display: none;

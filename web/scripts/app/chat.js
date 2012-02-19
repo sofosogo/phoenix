@@ -15,17 +15,19 @@ var component = require("component"),
 var chat = exports;
 chat.info = info;
 
+var socket, users, passport;
+
 function info( msg ){
     if( typeof msg === "string" ){
         msg = {msg: "[系统] " + msg, type: "system"};
     }
-    var from = msg.from === user.passport ? 
+    var from = msg.from === passport ? 
         "我" : "<span p='" + msg.from + "'>" + msg.fromname + "</span>";
     if( msg.to === "all" ){
         msg.msg = "[群聊] " + from + "说：" + msg.msg;
         msg.type = "world";
     }else if( msg.to ){
-        var to = msg.to === user.passport ? 
+        var to = msg.to === passport ? 
             "我" : "<span p='" + msg.to + "'>" + msg.toname + "</span>";
         msg.msg = "[个人] " + from + "对" + to + "说： " + msg.msg;
         msg.type = "p2p";
@@ -36,30 +38,33 @@ function info( msg ){
     $msglist[0].scrollTop = $msglist[0].scrollHeight;
 }
 
-var socket, users, user;
 dh.listen("user", function(data){
-    user = data.data;
-    if( !user || !user.uid || !user.name ){
-        return socket.disconnect();
+    var user = data.data;
+    passport = user ? user.passport : null;
+    if( !passport ){
+        console.log("logout socket ...")
+        return socket.emit("logout");
     }
     if( socket ) return socket.socket.reconnect();
-    socket = io.connect("/");
+    socket = io.connect("/chat");
     socket.on("connect", function( data ){
-        socket.emit( "login", getCookie("sid") );
+        socket.emit("user-list");
         $msglist.empty();
         $input.empty();
         $chat.show();
+        info("你已经成功登录聊天服务器。");
     });
     socket.on("connect_failed", function( data ){
         console.log("connect_failed--------------------");
+        console.log(data);
     });
-    socket.on("login", function( us ){
-        info( "你已经成功登录聊天服务器。" );
+    socket.on("user-list", function( us ){
         users = us;
         $contactlist.hide().empty();
         $("<option>", {value: "all", text: "所有人"})
             .appendTo( $contactlist );
         for( var p in us ){
+            if( p === passport ) continue;
             $("<option>", {value: p, text: us[p]})
                 .appendTo( $contactlist );
         }
@@ -116,6 +121,7 @@ $msglist.delegate("span", "click", function(e){
     if( !users[p] ) return info( this.innerHTML + " 已离线，不能发消息给TA。");
     $contactlist.val( p );
     $input.focus();
+    e.stopPropagation();
 });
 $contactlist.change(function(){
     $input.focus();
