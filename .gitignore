@@ -4,3 +4,6 @@
 /.project
 /node
 /npm-debug.log
+/web/images/Thumbs.db
+/web/images/upload/Thumbs.db
+/curl.exe

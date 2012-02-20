@@ -192,11 +192,11 @@ input.search_bt{
     height: 50px;
     margin: 10px 0 0;
     text-align: center;
-    background: -webkit-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
-    background:    -moz-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
-    background:     -ms-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
-    background:      -o-linear-gradient(left, #F2F2F2, #444, #F2F2F2);   
-    background:         linear-gradient(left, #F2F2F2, #444, #F2F2F2);
+    background: -webkit-linear-gradient(left, #2A0A0D, #660D31, #2A0A0D);   
+    background:    -moz-linear-gradient(left, #2A0A0D, #660D31, #2A0A0D);   
+    background:     -ms-linear-gradient(left, #2A0A0D, #660D31, #2A0A0D);   
+    background:      -o-linear-gradient(left, #2A0A0D, #660D31, #2A0A0D);   
+    background:         linear-gradient(left, #2A0A0D, #660D31, #2A0A0D);
     background: url(/images/page-bg.jpg) repeat-y\9;
     *background:url(/images/page-bg.jpg) repeat-y;
 }

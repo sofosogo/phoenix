@@ -61,12 +61,9 @@ section.content{
     margin-left: 180px;
 }
 .title {
-    color: #FFFFFF;
-    padding: 5px 0 10px;
-}
-.title a {
     color: #DF6195;
-    text-decoration: underline;
+    padding: 15px 0 0;
+    font-size: 14px;
 }
 
 /*---------------------- list -----------------------*/
